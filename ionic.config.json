@@ -1,0 +1,8 @@
+{
+  "name": "HealthCalendar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "a906c1b1"
+}
