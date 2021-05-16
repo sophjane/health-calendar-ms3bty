@@ -1,0 +1,8 @@
+.person-name{
+    background-color: #808080;
+}
+
+.person-name strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
