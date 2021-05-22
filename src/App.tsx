@@ -19,6 +19,7 @@ import Home from "./pages/Home";
 import Appointments from "./pages/Appointments";
 import Analysis from "./pages/Analysis";
 import Settings from "./pages/Settings";
+import CreateAppointment from "./pages/CreateAppointment";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -51,6 +52,11 @@ const App: React.FC = () => (
             exact
             path="/appointments"
             render={(props) => <Appointments {...props} />}
+          ></Route>
+          <Route
+            exact
+            path="/appointments/create"
+            render={(props) => <CreateAppointment {...props} />}
           ></Route>
           <Route
             path="/Analysis"
