@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import HomeCalendar from '../components/HomeComponents/HomeCalendar';
+import HomeCalendar from '../components/HomeCalendar';
 import './Home.css';
 
 const Home: React.FC = () => {
