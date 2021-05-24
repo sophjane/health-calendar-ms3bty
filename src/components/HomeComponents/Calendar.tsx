@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {CalendarComponent, ChangedEventArgs, RenderDayCellEventArgs} from '@syncfusion/ej2-react-calendars'
+import {Row, Col} from 'react-bootstrap';
 import './Calendar.css'
 const Calendar = () => {
     const [date, setDate] = useState(new Date());
@@ -22,7 +23,10 @@ const Calendar = () => {
         
     }
     return (
-        <div>
+        <div className="home-calendar">
+        <Row className="calendar-header d-flex justify-content-center align-items-center mx-0">
+                            <div><h5><strong className="primary">O seu Calendário</strong></h5></div>
+                        </Row>
             <CalendarComponent
                     id="calendar"
                     value={date}
@@ -30,7 +34,8 @@ const Calendar = () => {
                     isMultiSelection={false}
                     depth="Month"
                     onChange={onClickDay}
-                   
+                    min={minDates[0]}
+                    max={maxDates[0]}
                     ></CalendarComponent>
         </div>
     )
