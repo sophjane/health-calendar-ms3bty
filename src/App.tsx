@@ -15,6 +15,8 @@ import {
   readerOutline,
   settingsOutline,
 } from "ionicons/icons";
+
+import Login from './pages/Login'
 import Home from "./pages/Home";
 import Appointments from "./pages/Appointments";
 import Analysis from "./pages/Analysis";
@@ -46,6 +48,9 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
+        <Route exact path="/login">
+            <Login />
+          </Route>
           <Route exact path="/Home">
             <Home />
           </Route>
@@ -67,7 +72,7 @@ const App: React.FC = () => (
             <Settings />
           </Route>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <Redirect to="/login" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

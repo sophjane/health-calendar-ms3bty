@@ -1,9 +1,7 @@
-import React, {useState,} from 'react';
+import React from 'react';
 //import Calendar from 'react-calendar';
 
 import {IonGrid, IonRow, IonCol, IonContent, IonText, IonButton, IonLabel } from '@ionic/react';
-
-import icon from '%PUBLIC_URL%/assets/icon/favicon.png'
 
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
@@ -12,7 +10,6 @@ import '@ionic/react/css/flex-utils.css';
 import "./HomeCalendar.css";
 import Calendar from "./Calendar"
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Row } from 'react-bootstrap';
 
 
 interface person {
