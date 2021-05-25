@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./PersonalInfo.css"
+import "./Settings.css"
 import { IonButton, IonContent, IonGrid, IonPage, IonCol, IonRow, IonText, useIonModal, IonItemDivider, IonInput} from '@ionic/react';
 
 interface ContainerProps{

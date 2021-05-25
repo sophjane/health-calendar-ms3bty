@@ -1,0 +1,35 @@
+.per-info-header{
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.info{
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+.edit-btn{
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    --ion-color-primary: #068B80;
+    margin-top: 10px;
+}
+
+.submit-btn{
+    margin-left: auto;
+    text-align:center;
+    --ion-color-primary: #068B80;
+    margin-top: 10px;
+}
+
+.close-btn{
+    margin-right: auto;
+    text-align:center;
+    --ion-color-primary: #068B80;
+    margin-top: 10px;
+}
