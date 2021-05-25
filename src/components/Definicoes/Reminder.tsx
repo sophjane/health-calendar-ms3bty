@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
+import "./Settings.css"
+import { IonCol, IonContent, IonGrid, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonText } from '@ionic/react';
 
-import { IonCol, IonContent, IonGrid, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption } from '@ionic/react';
 
 const Reminder: React.FC = () => {
     const [days, setDays] = useState<string>('1');
     const [hours, setHours] = useState<string>('0');
     const [minutes, setMinutes] = useState<string>('0');
     return (
-            <IonContent>
                 <IonGrid>
                     <IonRow>
-                        <h4>LEMBRETE</h4>
+                        <IonText className="per-info-header" style = {{fontSize: 20}}>LEMBRETE</IonText>
                     </IonRow>
                     <IonRow>
-                        <p>Lembrar-me sempre antes das consultas</p>
+                        <p className="info">Lembrar-me sempre antes das consultas</p>
                     </IonRow>
                     <IonRow>
-                        <IonCol size="3">
+                        <IonCol size="4">
                             <IonList>
                                 <IonItem>
                                     <IonLabel>Dias</IonLabel>
@@ -39,7 +39,7 @@ const Reminder: React.FC = () => {
                                 </IonItem>
                             </IonList>
                         </IonCol>
-                        <IonCol size="3">
+                        <IonCol size="4">
                             <IonList>
                                 <IonItem>
                                     <IonLabel>Horas</IonLabel>
@@ -72,7 +72,7 @@ const Reminder: React.FC = () => {
                                 </IonItem>
                             </IonList>
                         </IonCol>
-                        <IonCol size="3">
+                        <IonCol size="4">
                             <IonList>
                                 <IonItem>
                                     <IonLabel>Minutos</IonLabel>
@@ -95,7 +95,6 @@ const Reminder: React.FC = () => {
                         </IonCol>
                     </IonRow>
                 </IonGrid>
-            </IonContent>
     )
 }
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import "./Settings.css"
 import {IonContent, IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from '@ionic/react';
 
 const Buttons: React.FC = () => {
@@ -40,7 +40,7 @@ const Buttons: React.FC = () => {
       )
     }
     return (
-      <IonContent>
+      <>
         <IonList>
           <IonItem>
             <IonLabel>Cidade</IonLabel>
@@ -50,7 +50,7 @@ const Buttons: React.FC = () => {
             </IonItem>
         </IonList>
         {display}
-      </IonContent>
+      </>
     );
 }
 
