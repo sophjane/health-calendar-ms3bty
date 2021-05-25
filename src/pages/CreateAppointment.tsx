@@ -1,5 +1,6 @@
 import Toolbar from "../components/Toolbar";
 import {
+  IonAlert,
   IonButton,
   IonContent,
   IonHeader,
@@ -13,6 +14,7 @@ import React, { useState } from "react";
 import { RouteComponentProps } from "react-router";
 import "./CreateAppointment.css";
 import Layout from "../components/Layout";
+import DateButton from "../components/DateButton";
 
 const dummySpecialities = [
   { value: "acupuntura", label: "Acupuntura" },
@@ -65,8 +67,9 @@ const dummyDoctor = [
   },
 ];
 
-const CreateAppointment: React.FC<RouteComponentProps> = () => {
+const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
   const [form, setFormValue] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log(form);
   return (
@@ -76,7 +79,11 @@ const CreateAppointment: React.FC<RouteComponentProps> = () => {
       </IonHeader>
       <IonContent fullscreen>
         <Layout>
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <IonItem className="appointment-select">
               <IonLabel>Tipo</IonLabel>
               <IonSelect
@@ -137,22 +144,36 @@ const CreateAppointment: React.FC<RouteComponentProps> = () => {
                 ))}
               </IonSelect>
             </IonItem>
+            {/* TODO: fazer onClick */}
+            <DateButton onClick={() => console.log()}></DateButton>
             <IonButton
-              className="availability-btn"
-              shape="round"
-              expand="block"
-              //onClick={() => setIsOpen(true)}
-            >
-              Data Pretendida
-            </IonButton>
-            <IonButton
-              type="submit"
               className="schedule-btn"
               size="large"
-              //onClick={() => setIsOpen(true)}
+              onClick={() => setIsOpen(true)}
             >
               Marcar
             </IonButton>
+            <IonAlert
+              isOpen={isOpen}
+              onDidDismiss={() => setIsOpen(false)}
+              cssClass=""
+              header="DESEJA CRIAR LEMBRETE?"
+              buttons={[
+                {
+                  text: "SIM",
+                  handler: () => {
+                    // TODO: Redirecionar para definições
+                    console.log("Sim");
+                  },
+                },
+                {
+                  text: "NÃO",
+                  handler: () => {
+                    history.push("/appointments");
+                  },
+                },
+              ]}
+            />
           </form>
         </Layout>
       </IonContent>
