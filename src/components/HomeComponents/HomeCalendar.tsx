@@ -39,8 +39,8 @@ const HomeCalendar: React.FC<person> = ({ name, sex }) => {
                             <Calendar/>
                     </IonRow>
                     <IonRow className="button-row d-flex justify-content-between mx-auto mt-3 pt-3">
-                        <IonButton color="primary" href="#"><IonLabel>Marcar Consulta/Análise</IonLabel></IonButton>
-                        <IonButton href="#"><IonLabel>As Minhas Análises</IonLabel></IonButton>
+                        <IonButton color="primary" href="/appointments  "><IonLabel>Marcar Consulta/Análise</IonLabel></IonButton>
+                        <IonButton href="/analysis"><IonLabel>As Minhas Análises</IonLabel></IonButton>
                     </IonRow>
                     <IonRow className="d-flex justify-content-center my-3 pt-3 mx-auto button-row">
                         <IonButton color="danger"><IonLabel>Video-Chamada</IonLabel></IonButton>

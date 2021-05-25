@@ -30,7 +30,7 @@ const Calendar = () => {
                                 <IonText className="d-flex align-items-center col-sm-6" color="tertiary">
                                 <h4 style={{fontWeight:"bold"}} id="your-calendar" className="my-0 ml-2">O seu Calendário</h4>
                                 </IonText>
-                                <IonButton size="small" className="col-sm-4 col-lg-5"><IonLabel>Adicionar Lembrete</IonLabel></IonButton></div>
+                                <IonButton href="/settings" size="small" className="col-sm-4 col-lg-5"><IonLabel>Adicionar Lembrete</IonLabel></IonButton></div>
                         </Row>
             <CalendarComponent
                     id="calendar"
