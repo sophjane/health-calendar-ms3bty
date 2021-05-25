@@ -1,29 +1,25 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import HomeCalendar from '../components/HomeComponents/HomeCalendar';
-import './Home.css';
+import ExploreContainer from '../components/ExploreContainer';
+import './Appointments.css';
 
-const Home: React.FC = () => {
-  const personDetails = {
-    name : 'Joana',
-    sex : 'F'
-  }
+const Login: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Página Inicial</IonTitle>
+          <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Página Inicial</IonTitle>
+            <IonTitle size="large">Login</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <HomeCalendar { ...personDetails} />
+        <ExploreContainer name="Login" />
       </IonContent>
     </IonPage>
   );
 };
-
-export default Home;
+//Different page (probably not gonna appear on app.tsx)
+export default Login;
