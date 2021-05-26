@@ -13,7 +13,7 @@ import { IonButton,
     useIonModal,
     useIonToast} from '@ionic/react';
 
-
+/*button with password + hospital chosen*/
 var trigerPassword = false;
 var trigerConfirmation = false;
 var password = '';
