@@ -23,10 +23,12 @@ const Analysis: React.FC<RouteComponentProps> = ({ history }) => {
           alertHeader="ANÁLISES"
           alertMessage="Pode obter a sua lista de exames/análises a fazer ou obter os seus resultados"
         >
-          <ThickButton onClick={() => history.push("/")}>
+          <ThickButton onClick={() => history.push("/Analysis/analysisToDo")}>
             Análises A Fazer
           </ThickButton>
-          <ThickButton onClick={() => history.push("/")}>
+          <ThickButton
+            onClick={() => history.push("/Analysis/analysisResults")}
+          >
             Resultados De Análises
           </ThickButton>
         </ActionScreen>
