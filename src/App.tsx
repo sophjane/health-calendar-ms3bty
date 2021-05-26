@@ -22,7 +22,7 @@ import Appointments from "./pages/Appointments";
 import Analysis from "./pages/Analysis";
 import Settings from "./pages/Settings";
 import CreateAppointment from "./pages/CreateAppointment";
-
+import CreateAccount from './pages/CreateAccount'
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -48,8 +48,13 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-        <Route exact path="/login">
-            <Login />
+        <Route exact path="/login"
+            render={(props) => <Login {...props}/>}></Route>
+              <Route
+            exact
+            path="/create-account"
+            render={(props) => <CreateAccount {...props} />}
+          >
           </Route>
           <Route exact path="/Home">
             <Home />
