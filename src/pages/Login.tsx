@@ -11,13 +11,16 @@ import {
     IonInput,
     IonIcon, 
     IonButton,
-    IonText} from '@ionic/react';
-import CreateAccount from '../components/Login/CreateAccount';
+    IonText,
+    IonAlert} from '@ionic/react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { person, key } from 'ionicons/icons';
+import { RouteComponentProps } from 'react-router';
+import {useState} from 'react'
 
-const Login: React.FC = () => {
+
+const Login: React.FC<RouteComponentProps> = ({history}) => {
   const joanaSilva = {
     name : 'Joana Silva',
     email:'joanasilva@gmail.com',
@@ -30,6 +33,9 @@ const Login: React.FC = () => {
       email:'default email',
       password:'default password'
   }
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <IonPage>
         <IonHeader>
@@ -56,11 +62,18 @@ const Login: React.FC = () => {
                     <IonText className="mr-3" style={{fontSize:"small"}}>Esqueci-me da palavra-passe</IonText>
                 </IonRow>
                 <IonRow className="d-flex justify-content-between">
-                    <IonButton className="col-md-4 my-2"><IonLabel>Entrar</IonLabel></IonButton>
-                    <IonButton className="col-md-4 my-2"><IonLabel>Criar Conta</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" onClick={() => setIsOpen(true)}><IonLabel>Entrar</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" onClick={() => history.push("/create-account")}><IonLabel>Criar Conta</IonLabel></IonButton>
                 </IonRow>
+                <IonAlert
+          isOpen={isOpen}
+          onDidDismiss={() => history.push("/home")}
+          cssClass="help-alert"
+          header={"Guardar Dados?"}
+          message={"Ao clicar em 'Sim' não precisará inserir os dados de inicio novamente."}
+          buttons={["Sim", "Não"]}
+        />
             </IonGrid>
-            {false && <CreateAccount />}
         </IonContent>
     </IonPage>
   );
