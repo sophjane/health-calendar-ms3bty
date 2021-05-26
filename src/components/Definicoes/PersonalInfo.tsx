@@ -10,7 +10,7 @@ import { IonButton,
     useIonToast} from '@ionic/react';
 
 interface ContainerProps{
-    onSave(arg0 : string, arg1 : string, arg2 : string) : void ;
+/*     onSave(arg0 : string, arg1 : string, arg2 : string) : void ; */
     name : string;
     email : string;
     pacientNumber : string;
@@ -23,6 +23,7 @@ const dictionary = {
 var trigerName = false;
 var trigerEmail = false;
 var trigerPatientNumber = false;
+var trigerCloseWinfo = false;
 
 const Body: React.FC<{
     changeName : string;
@@ -69,7 +70,7 @@ const Body: React.FC<{
         </IonButton>
         </IonCol>
         <IonCol size="6">
-        <IonButton className="close-btn" expand="block" onClick={() => onDismiss()}>
+        <IonButton className="close-btn" expand="block" onClick={() => {onDismiss();}}>
             Close
         </IonButton>
         </IonCol>
@@ -77,14 +78,17 @@ const Body: React.FC<{
     </div>
   );
 
-const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber, onSave }) => {
+const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber /*, onSave*/ }) => {
 
     const [changeName, setChangeName] = useState<string>(name);
     const [changeEmail, setChangeEmail] = useState<string>(email);
     const [changePacientNumber, setChangePacientNumber] = useState<string>(pacientNumber);
   
   const handleDismiss = () => {
-    dismiss();
+    if (!trigerCloseWinfo){
+      trigerName = false; trigerEmail= false; trigerPatientNumber = false;
+    }dismiss();
+    trigerCloseWinfo=false;
   };
 
   const handleSave = () => {
@@ -93,10 +97,12 @@ const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber, on
       setChangeEmail(email);
       setChangePacientNumber(pacientNumber);
       presentToast('Informações Atualizadas!', 3000);
+      trigerCloseWinfo = true;
     }
   }
 
   const [presentToast] = useIonToast();
+  
   /**
    * First parameter is the component to show, second is the props to pass
    */
@@ -110,30 +116,30 @@ const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber, on
 
   return (
       <IonGrid>
-            <IonRow>
-                <IonText className="per-info-header" style = {{fontSize: 20}}>INFORMAÇÕES PESSOAIS</IonText>
-            </IonRow>
-            <IonRow>
-                <IonText className="info" style = {{fontSize: 15}}><p>Nome do Utilizador: {trigerName ? dictionary.name : name}</p></IonText>
-            </IonRow>
-            <IonRow>
-                <IonText className="info" style = {{fontSize: 15}}><p>Email: {trigerEmail ? dictionary.email : email}</p></IonText>
-            </IonRow>
-            <IonRow>
-              <IonText 
-                className="info"
-                style={{fontSize: 15}}>
-                 <p>Número de Utente: {trigerPatientNumber ? dictionary.pacientNumber : pacientNumber}</p>
-                 </IonText>
-            </IonRow>
-            <IonRow>
-              <IonButton 
-              className="edit-btn" 
-              expand="block" 
-              onClick={() => {present({cssClass: 'my-class'})}} >
-                    Editar
-              </IonButton>
-            </IonRow>
+          <IonRow>
+              <IonText className="per-info-header" style = {{fontSize: 20}}>INFORMAÇÕES PESSOAIS</IonText>
+          </IonRow>
+          <IonRow>
+              <IonText className="info" style = {{fontSize: 15}}><p>Nome do Utilizador: {trigerName ? dictionary.name : name}</p></IonText>
+          </IonRow>
+          <IonRow>
+              <IonText className="info" style = {{fontSize: 15}}><p>Email: {trigerEmail ? dictionary.email : email}</p></IonText>
+          </IonRow>
+          <IonRow>
+            <IonText 
+              className="info"
+              style={{fontSize: 15}}>
+                <p>Número de Utente: {trigerPatientNumber ? dictionary.pacientNumber : pacientNumber}</p>
+                </IonText>
+          </IonRow>
+          <IonRow>
+            <IonButton 
+            className="edit-btn" 
+            expand="block" 
+            onClick={() => {present({cssClass: 'my-class'})}} >
+                  Editar
+            </IonButton>
+          </IonRow>
         </IonGrid>
   );
 };
