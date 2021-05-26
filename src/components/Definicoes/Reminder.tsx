@@ -13,7 +13,7 @@ const Reminder: React.FC = () => {
                 <IonText className="per-info-header" style = {{fontSize: 20}}>LEMBRETE</IonText>
             </IonRow>
             <IonRow>
-                <p className="info">Lembrar-me sempre antes das consultas</p>
+                <p className="info">Lembrar-me sempre antes das consultas/análises</p>
             </IonRow>
             <IonRow>
                 <IonCol size="4">
