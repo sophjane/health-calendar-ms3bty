@@ -1,9 +1,16 @@
 import React, {useState} from 'react';
-import "./PersonalInfo.css"
-import { IonButton, IonContent, IonGrid, IonPage, IonCol, IonRow, IonText, useIonModal, IonItemDivider, IonInput} from '@ionic/react';
+import "./Settings.css"
+import { IonButton,
+    IonCol,
+    IonGrid,
+    IonRow,
+    IonText,
+    useIonModal,
+    IonInput,
+    useIonToast} from '@ionic/react';
 
 interface ContainerProps{
-    onSave(arg0 : string, arg1 : string, arg2 : string) : void ;
+/*     onSave(arg0 : string, arg1 : string, arg2 : string) : void ; */
     name : string;
     email : string;
     pacientNumber : string;
@@ -16,54 +23,86 @@ const dictionary = {
 var trigerName = false;
 var trigerEmail = false;
 var trigerPatientNumber = false;
+var trigerCloseWinfo = false;
 
 const Body: React.FC<{
     changeName : string;
     changeEmail : string;
     changePacientNumber : string;
     onDismiss: () => void;
-    handleSave: (arg0 : string, arg1: string, arg2: string) => void;
-  }> = ({ changeName, changeEmail, changePacientNumber, onDismiss, handleSave}) => (
-    <div>
-        <IonText className="per-info-header" style = {{fontSize: 25}}><strong>ATUALIZAR INFORMAÇÕES PESSOAIS</strong></IonText>
-        <IonItemDivider>Nome de Utilizador:</IonItemDivider>
-        <IonInput type="text" value={changeName} onIonChange={(e) => {dictionary.name = (e.target as HTMLInputElement).value; trigerName = true} }></IonInput>
-        <IonItemDivider>Email:</IonItemDivider>
-        <IonInput type="text" value={changeEmail} onIonChange={(e) => {dictionary.email = (e.target as HTMLInputElement).value; trigerEmail = true} }></IonInput>
-        <IonItemDivider>Número de Paciente:</IonItemDivider>
-        <IonInput type="text" value={changePacientNumber} onIonChange={(e) => {dictionary.pacientNumber = (e.target as HTMLInputElement).value; trigerPatientNumber = true} }></IonInput>
-
-        <IonButton expand="block" onClick={() => {
+    onSave: (arg0 : string, arg1: string, arg2: string) => void;
+  }> = ({ changeName, changeEmail, changePacientNumber, onDismiss, onSave}) => (
+    <div className="grey-background">
+        <IonRow className="model-header">
+        <IonText className="model-header-text" style = {{fontSize: 20}}>
+          <strong >Atualizar Info Pessoal</strong>
+          </IonText>
+        </IonRow>
+        <IonRow>
+            <IonText className="input-title"><strong>Nome de Utilizador</strong></IonText>
+        </IonRow>
+        <IonRow>
+        <IonInput 
+        className="info" 
+        type="text" 
+        value={trigerName ? dictionary.name : changeName} 
+        onIonChange={(e) => {dictionary.name = (e.target as HTMLInputElement).value; trigerName = true} }>
+        </IonInput>
+        </IonRow>
+        <IonRow >
+            <IonText className="input-title"><strong>Email</strong></IonText>
+        </IonRow>
+        <IonRow className="info">
+        <IonInput type="email" value={trigerEmail ? dictionary.email : changeEmail} onIonChange={(e) => {dictionary.email = (e.target as HTMLInputElement).value; trigerEmail = true} }></IonInput>
+        </IonRow>
+        <IonRow >
+            <IonText className="input-title"><strong>Número de Paciente</strong></IonText>
+        </IonRow>
+        <IonRow>
+        <IonInput className="info" value={trigerPatientNumber ? dictionary.pacientNumber : changePacientNumber} onIonChange={(e) => {dictionary.pacientNumber = (e.target as HTMLInputElement).value; trigerPatientNumber = true} }></IonInput>
+        </IonRow>
+        <IonRow>
+          <IonCol size="6">
+        <IonButton className="submit-btn" expand="block" onClick={() => {
           console.log(dictionary.name);
-          handleSave(dictionary.name, dictionary.email, dictionary.pacientNumber); onDismiss()}}>
+          onSave(dictionary.name, dictionary.email, dictionary.pacientNumber)}}>
             Atualizar
         </IonButton>
-        <IonButton expand="block" onClick={() => onDismiss()}>
+        </IonCol>
+        <IonCol size="6">
+        <IonButton className="close-btn" expand="block" onClick={() => {onDismiss();}}>
             Close
         </IonButton>
+        </IonCol>
+        </IonRow>
     </div>
   );
 
-const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber, onSave }) => {
-    /*const [present] = useIonAlert();*/
-
-    const [count, setCount] = useState(0);
+const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber /*, onSave*/ }) => {
 
     const [changeName, setChangeName] = useState<string>(name);
     const [changeEmail, setChangeEmail] = useState<string>(email);
     const [changePacientNumber, setChangePacientNumber] = useState<string>(pacientNumber);
-
+  
   const handleDismiss = () => {
-    dismiss();
+    if (!trigerCloseWinfo){
+      trigerName = false; trigerEmail= false; trigerPatientNumber = false;
+    }dismiss();
+    trigerCloseWinfo=false;
+  };
+
+  const handleSave = () => {
     if (trigerName || trigerEmail || trigerPatientNumber){
       setChangeName(name);
       setChangeEmail(email);
       setChangePacientNumber(pacientNumber);
-      console.log('!!'+dictionary.name);
+      presentToast('Informações Atualizadas!', 3000);
+      trigerCloseWinfo = true;
     }
-  };
+  }
 
-
+  const [presentToast] = useIonToast();
+  
   /**
    * First parameter is the component to show, second is the props to pass
    */
@@ -72,35 +111,36 @@ const PersonalInfo: React.FC<ContainerProps> = ({ name, email, pacientNumber, on
     changeEmail,
     changePacientNumber,
     onDismiss: handleDismiss,
-    handleSave: onSave,
+    onSave: handleSave,
   });
 
   return (
-    <IonPage>
-      <IonContent>
       <IonGrid>
-            <IonRow>
-                <IonText className="per-info-header" style = {{fontSize: 25}}>INFORMAÇÕES PESSOAIS</IonText>
-            </IonRow>
-            <IonRow>
-                <IonText className="info" style = {{fontSize: 15}}><p>Nome do Utilizador: {trigerName ? dictionary.name : name}</p></IonText>
-            </IonRow>
-            <IonRow>
-                <IonText className="info" style = {{fontSize: 15}}><p>Email: {trigerEmail ? dictionary.email : email}</p></IonText>
-            </IonRow>
-            <IonRow>
-                <IonCol size="7">
-                    <IonText className="info" style={{fontSize: 15}}>Número de Utente: {trigerPatientNumber ? dictionary.pacientNumber : pacientNumber}</IonText>
-                </IonCol>
-                <IonCol size="5">
-                    <IonButton color="primary" expand="block" onClick={() => {present({cssClass: 'my-class'})}} >
-                        Editar
-                    </IonButton>
-                </IonCol>
-            </IonRow>
+          <IonRow>
+              <IonText className="per-info-header" style = {{fontSize: 20}}>INFORMAÇÕES PESSOAIS</IonText>
+          </IonRow>
+          <IonRow>
+              <IonText className="info" style = {{fontSize: 15}}><p>Nome do Utilizador: {trigerName ? dictionary.name : name}</p></IonText>
+          </IonRow>
+          <IonRow>
+              <IonText className="info" style = {{fontSize: 15}}><p>Email: {trigerEmail ? dictionary.email : email}</p></IonText>
+          </IonRow>
+          <IonRow>
+            <IonText 
+              className="info"
+              style={{fontSize: 15}}>
+                <p>Número de Utente: {trigerPatientNumber ? dictionary.pacientNumber : pacientNumber}</p>
+                </IonText>
+          </IonRow>
+          <IonRow>
+            <IonButton 
+            className="edit-btn" 
+            expand="block" 
+            onClick={() => {present({cssClass: 'my-class'})}} >
+                  Editar
+            </IonButton>
+          </IonRow>
         </IonGrid>
-      </IonContent>
-    </IonPage>
   );
 };
 
