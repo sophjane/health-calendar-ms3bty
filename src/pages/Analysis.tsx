@@ -11,6 +11,7 @@ import ActionScreen from "../components/ActionScreen";
 import ThickButton from "../components/ThickButton";
 import Toolbar from "../components/Toolbar";
 import "./Analysis.css";
+import Analysis_ToDo from "./Analysis_ToDo";
 
 const Analysis: React.FC<RouteComponentProps> = ({ history }) => {
   return (
@@ -30,6 +31,7 @@ const Analysis: React.FC<RouteComponentProps> = ({ history }) => {
             Resultados De Análises
           </ThickButton>
         </ActionScreen>
+        <Analysis_ToDo />
       </IonContent>
     </IonPage>
   );
