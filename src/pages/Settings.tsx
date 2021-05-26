@@ -1,25 +1,35 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Settings.css';
+import { IonContent, IonHeader, IonPage } from "@ionic/react";
+import PersonalInfo from "../components/Definicoes/PersonalInfo";
+import Buttons from "../components/Definicoes/Buttons";
+import Reminder from "../components/Definicoes/Reminder";
 
-const Tab1: React.FC = () => {
+import Toolbar from "../components/Toolbar";
+
+const userDetails: React.FC = () => {
+  /* const onSave = (nameP: string, email: string, pacientNumber: string) => {
+    personDetails.name = nameP;
+    personDetails.email = email;
+    personDetails.pacientNumber = pacientNumber;
+    console.log(personDetails.name);
+  } */
+  const personDetails = {
+    /*     onSave : onSave, */
+    name: "Joana Silva",
+    email: "joanasilva@gmail.com",
+    pacientNumber: "123456789",
+  };
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Definições</IonTitle>
-        </IonToolbar>
+        <Toolbar title="Definições"></Toolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Definições</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Definições" />
+      <IonContent>
+        <PersonalInfo {...personDetails} />
+        <Buttons />
+        <Reminder />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default userDetails;
