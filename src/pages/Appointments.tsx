@@ -17,10 +17,14 @@ const Appointments: React.FC<RouteComponentProps> = ({ history }) => {
           alertHeader="MARCAR"
           alertMessage="Pode marcar consulta com o seu médico ou marcar consulta para fazer análises clínicas"
         >
-          <ThickButton onClick={() => history.push("/appointments/create")}>
+          <ThickButton
+            onClick={() => history.push("/appointments/createAppointment")}
+          >
             Marcar Consulta
           </ThickButton>
-          <ThickButton onClick={() => history.push("/")}>
+          <ThickButton
+            onClick={() => history.push("/appointments/createAnalysis")}
+          >
             Marcar Análise
           </ThickButton>
         </ActionScreen>
