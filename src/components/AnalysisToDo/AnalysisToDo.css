@@ -1,0 +1,29 @@
+.speciality{
+    margin-bottom: 10px;
+}
+
+.date{
+    margin-top: 23px;
+    text-align:right ;
+}
+
+.unread-header{
+    size: 5px;
+    padding: auto;
+    padding-right: 15px;
+    text-align:end;
+    color: #127780;
+}
+
+.unread{
+    color: #068b80;
+    padding-right: 0px;
+    width: 100%;
+}
+
+.read{
+    color:#000000;
+    width: 100%;
+    
+}
+

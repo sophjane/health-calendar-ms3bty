@@ -26,6 +26,7 @@ import CreateAccount from './pages/CreateAccount'
 import CreateAnalysis from "./pages/CreateAnalysis";
 import AnalysisToDo from "./pages/AnalysisToDo";
 import AnalysisResults from "./pages/AnalysisResults";
+import VideoCall from "./pages/VideoCall";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -101,6 +102,11 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
+          <Route
+            exact
+            path="/home/videocall"
+            render={(props) => <VideoCall {...props} />}
+          ></Route>
         </IonRouterOutlet>
         
         
