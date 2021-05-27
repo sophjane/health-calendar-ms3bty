@@ -1,5 +1,9 @@
-.available-day span.e-day{
-    background-color: #60f542;
+.appointment span.e-day{
+    background-color: #15eda3;
+    border-radius: 60px !important;
+}
+.analysis span.e-day{
+    background-color: #068b80;
     border-radius: 60px !important;
 }
 .e-calendar, .e-bigger.e-small .e-calendar {
@@ -9,21 +13,21 @@
     width:100% !important;
 }
 .e-calendar .e-content td.e-today.e-selected span.e-day, .e-calendar .e-content td.e-selected span.e-day, .e-calendar .e-content td.e-selected.e-focused-date span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected.e-focused-date span.e-day {
-    background-color: #137400 !important;
+    background-color: #0ea47a !important;
     color: #fff;
 }
 .e-calendar .e-content td.e-today.e-selected:hover span.e-day, .e-calendar .e-content td.e-selected:hover span.e-day, .e-calendar .e-content td.e-selected.e-focused-date span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected:hover span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-selected.e-focused-date span.e-day {
-    background-color: #1374009c !important;
+    background-color: #068b80 !important;
     color: #fff;
 }
 .e-calendar .e-content td.e-today.e-selected span.e-day, .e-calendar .e-content td.e-focused-date.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-focused-date.e-today span.e-day{
-    border-color: #1374009c !important;
-    color:#56ff72 !important;
+    border-color: #068b80 !important;
+    color:#fff !important;
     
 }
 .e-calendar .e-content td.e-today span.e-day, .e-calendar .e-content td.e-focused-date.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-today span.e-day, .e-bigger.e-small .e-calendar .e-content td.e-focused-date.e-today span.e-day{
-    border-color: #1374009c !important;
-     color:#1374009c !important;
+    border-color: #068b80 !important;
+     color:#068b80 !important;
     
 }
 .e-calendar{
