@@ -50,7 +50,8 @@ import "./theme/variables.css";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
+    
+    <IonTabs>
         <IonRouterOutlet>
         <Route exact path="/login"
             render={(props) => <Login {...props}/>}></Route>
@@ -60,8 +61,10 @@ const App: React.FC = () => (
             render={(props) => <CreateAccount {...props} />}
           >
           </Route>
-          <Route exact path="/Home">
-            <Home />
+          <Route exact path="/Home"
+          render={(props)=> <Home {...props}/>}
+          >
+            
           </Route>
           <Route
             exact
@@ -99,6 +102,8 @@ const App: React.FC = () => (
             <Redirect to="/login" />
           </Route>
         </IonRouterOutlet>
+        
+        
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
@@ -118,6 +123,7 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+
     </IonReactRouter>
   </IonApp>
 );
