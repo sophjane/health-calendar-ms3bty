@@ -1,0 +1,26 @@
+.person-name{
+    max-width: 42%;
+}
+
+.person-name strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+.calendar-header{
+    margin-top:3%;
+    background-color: #127780
+}
+.button-row{
+    max-width:40%
+}
+
+@media screen and (max-width:700px){
+    .button-row{
+        max-width: 100%;
+        flex-direction: column;
+    }
+    #your-calendar{
+        font-size: larger;
+    }
+}

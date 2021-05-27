@@ -15,6 +15,7 @@ import { RouteComponentProps } from "react-router";
 import "./CreateAppointment.css";
 import Layout from "../components/Layout";
 import DateButton from "../components/DateButton";
+import SchedulePopup from "../components/SchedulePopup";
 
 const dummySpecialities = [
   { value: "acupuntura", label: "Acupuntura" },
@@ -70,6 +71,7 @@ const dummyDoctor = [
 const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
   const [form, setFormValue] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [isDisplayed, setIsDisplayed] = useState(false);
 
   console.log(form);
   return (
@@ -145,7 +147,8 @@ const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
               </IonSelect>
             </IonItem>
             {/* TODO: fazer onClick */}
-            <DateButton onClick={() => console.log()}></DateButton>
+            <DateButton onClick={setIsDisplayed} isDisplayed={isDisplayed}></DateButton>
+            <SchedulePopup onClick={setIsDisplayed} isDisplayed={isDisplayed}></SchedulePopup>
             <IonButton
               className="schedule-btn"
               size="large"
