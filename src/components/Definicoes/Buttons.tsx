@@ -71,7 +71,7 @@ const Buttons: React.FC = () => {
       dismiss();
     }
     const handlesave = () => {
-      if (trigerPassword && trigerConfirmation){
+      if (trigerPassword && trigerConfirmation && password!==''){
         if(password.length >3 ){
           if (password === checkPassword){
               console.log(password);

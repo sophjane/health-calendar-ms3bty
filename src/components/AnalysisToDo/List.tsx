@@ -52,7 +52,7 @@ const List: React.FC<AnalysisProps> = ({type}) => {
         <IonList>
             <IonText>
                 <div  className = "unread-header"><strong>{count} Unread</strong></div>
-                <hr></hr>
+                <hr className="hr-color"></hr>
             </IonText>
             {analysis.map((e, index) => (
                 <IonItem  >
