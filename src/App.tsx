@@ -51,10 +51,7 @@ import "./theme/variables.css";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-    
-    <IonTabs>
-        <IonRouterOutlet>
-        <Route exact path="/login"
+    <Route exact={true} path="/login"
             render={(props) => <Login {...props}/>}></Route>
               <Route
             exact
@@ -62,6 +59,19 @@ const App: React.FC = () => (
             render={(props) => <CreateAccount {...props} />}
           >
           </Route>
+    <MainTabs></MainTabs>
+
+    </IonReactRouter>
+  </IonApp>
+);
+
+export default App;
+
+const MainTabs: React.FC = () => {
+ return(
+  <IonTabs>
+        <IonRouterOutlet>
+        
           <Route exact path="/Home"
           render={(props)=> <Home {...props}/>}
           >
@@ -129,9 +139,5 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
-
-    </IonReactRouter>
-  </IonApp>
-);
-
-export default App;
+)
+}
