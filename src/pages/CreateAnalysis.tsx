@@ -18,6 +18,8 @@ import { RouteComponentProps } from "react-router";
 import DateButton from "../components/DateButton";
 import Layout from "../components/Layout";
 import Toolbar from "../components/Toolbar";
+import SchedulePopup from "../components/SchedulePopup";
+
 import "./CreateAnalysis.css";
 
 const dummyHospital = [
@@ -67,6 +69,7 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
   const [selected, setSelected] = useState<string>("Hospital");
   const location = selected === "Hospital" ? dummyHospital : dummyClinic;
   const [isOpen, setIsOpen] = useState(false);
+  const [isDisplayed, setIsDisplayed] = useState(false);
 
   return (
     <IonPage>
@@ -107,7 +110,8 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
             </IonItem>
           </IonList>
           {/* TODO: fazer onClick */}
-          <DateButton onClick={() => console.log()}></DateButton>
+          <DateButton onClick={setIsDisplayed} isDisplayed={isDisplayed}></DateButton>
+            <SchedulePopup onClick={setIsDisplayed} isDisplayed={isDisplayed}></SchedulePopup>
           <IonButton
             className="schedule-btn"
             size="large"
