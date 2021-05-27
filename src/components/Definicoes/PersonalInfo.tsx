@@ -9,6 +9,7 @@ import {
   useIonModal,
   IonInput,
   useIonToast,
+  IonItem,
 } from "@ionic/react";
 
 interface ContainerProps {
@@ -47,7 +48,7 @@ const Body: React.FC<{
         <strong>Nome de Utilizador</strong>
       </IonText>
     </IonRow>
-    <IonRow>
+    <IonItem>
       <IonInput
         className="info"
         type="text"
@@ -57,13 +58,13 @@ const Body: React.FC<{
           trigerName = true;
         }}
       ></IonInput>
-    </IonRow>
+    </IonItem>
     <IonRow>
       <IonText className="input-title">
         <strong>Email</strong>
       </IonText>
     </IonRow>
-    <IonRow className="info">
+    <IonItem className="info">
       <IonInput
         type="email"
         value={trigerEmail ? dictionary.email : changeEmail}
@@ -72,13 +73,13 @@ const Body: React.FC<{
           trigerEmail = true;
         }}
       ></IonInput>
-    </IonRow>
+    </IonItem>
     <IonRow>
       <IonText className="input-title">
         <strong>Número de Paciente</strong>
       </IonText>
     </IonRow>
-    <IonRow>
+    <IonItem>
       <IonInput
         className="info"
         value={
@@ -89,7 +90,7 @@ const Body: React.FC<{
           trigerPatientNumber = true;
         }}
       ></IonInput>
-    </IonRow>
+    </IonItem>
     <IonRow>
       <IonCol size="6">
         <IonButton

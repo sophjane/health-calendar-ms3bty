@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage } from "@ionic/react";
+import { IonContent, IonGrid, IonHeader, IonPage } from "@ionic/react";
 import PersonalInfo from "../components/Definicoes/PersonalInfo";
 import Buttons from "../components/Definicoes/Buttons";
 import Reminder from "../components/Definicoes/Reminder";
@@ -24,9 +24,11 @@ const userDetails: React.FC = () => {
         <Toolbar title="Definições"></Toolbar>
       </IonHeader>
       <IonContent>
-        <PersonalInfo {...personDetails} />
-        <Buttons />
-        <Reminder />
+        <IonGrid>
+          <PersonalInfo {...personDetails} />
+          <Buttons />
+          <Reminder />
+        </IonGrid>
       </IonContent>
     </IonPage>
   );

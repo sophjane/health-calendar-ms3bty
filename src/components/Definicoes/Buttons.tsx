@@ -34,21 +34,21 @@ const Model: React.FC<{
     <IonRow>
       <IonText className="input-title"><strong>Nova Palavra Passe</strong></IonText>
     </IonRow>
-    <IonRow>
+    <IonItem>
       <IonInput className="info"
       type="password" 
       placeholder="Nova palavra-passe..."
       value={changePassword}  onIonChange={(e) => {password = (e.target as HTMLInputElement).value; trigerPassword = true} }></IonInput>
-    </IonRow>
+    </IonItem>
     <IonRow>
       <IonText className="input-title"><strong>Confirmar Nova Palavra Passe</strong></IonText>
     </IonRow>
-    <IonRow>
+    <IonItem>
       <IonInput className="info" 
       type="password" 
       value={checkChangedPassword}
       placeholder="Confirme a palavra-passe..."  onIonChange={(e) => {checkPassword = (e.target as HTMLInputElement).value; trigerConfirmation = true} }></IonInput>
-    </IonRow>
+    </IonItem>
     <IonRow>
           <IonCol size="6">
         <IonButton className="submit-btn" expand="block" onClick={() => {
@@ -74,7 +74,10 @@ const Buttons: React.FC = () => {
       if (trigerPassword && trigerConfirmation){
         if(password.length >3 ){
           if (password === checkPassword){
+              console.log(password);
               presentToast('Palavra passe mudada com sucesso!', 3000)
+              trigerPassword = false;
+              trigerConfirmation = false;
           }else{
             presentToast('Escreva a mesma palavra-passe!', 3000)
           }
