@@ -26,7 +26,6 @@ import CreateAccount from './pages/CreateAccount'
 import CreateAnalysis from "./pages/CreateAnalysis";
 import AnalysisToDo from "./pages/AnalysisToDo";
 import AnalysisResults from "./pages/AnalysisResults";
-import VideoCall from "./pages/VideoCall";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -51,7 +50,10 @@ import "./theme/variables.css";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-    <Route exact={true} path="/login"
+    
+    <IonTabs>
+        <IonRouterOutlet>
+        <Route exact path="/login"
             render={(props) => <Login {...props}/>}></Route>
               <Route
             exact
@@ -59,19 +61,6 @@ const App: React.FC = () => (
             render={(props) => <CreateAccount {...props} />}
           >
           </Route>
-    <MainTabs></MainTabs>
-
-    </IonReactRouter>
-  </IonApp>
-);
-
-export default App;
-
-const MainTabs: React.FC = () => {
- return(
-  <IonTabs>
-        <IonRouterOutlet>
-        
           <Route exact path="/Home"
           render={(props)=> <Home {...props}/>}
           >
@@ -112,11 +101,6 @@ const MainTabs: React.FC = () => {
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route
-            exact
-            path="/home/videocall"
-            render={(props) => <VideoCall {...props} />}
-          ></Route>
         </IonRouterOutlet>
         
         
@@ -139,5 +123,9 @@ const MainTabs: React.FC = () => {
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
-)
-}
+
+    </IonReactRouter>
+  </IonApp>
+);
+
+export default App;

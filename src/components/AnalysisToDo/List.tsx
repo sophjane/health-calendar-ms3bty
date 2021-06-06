@@ -45,6 +45,7 @@ const List: React.FC<AnalysisProps> = ({type}) => {
         tempArray[index] = "read";
         setStatesArray(tempArray);
         console.log(analysis)
+        window.open('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf')
         }
 
   return (
