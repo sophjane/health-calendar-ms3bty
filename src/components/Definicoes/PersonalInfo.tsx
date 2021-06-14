@@ -11,6 +11,7 @@ import {
   useIonToast,
   IonItem,
 } from "@ionic/react";
+import Card from 'react-bootstrap/Card';
 
 interface ContainerProps {
   /*     onSave(arg0 : string, arg1 : string, arg2 : string) : void ; */
@@ -97,11 +98,10 @@ const Body: React.FC<{
           className="submit-btn"
           expand="block"
           onClick={() => {
-            console.log(dictionary.name);
             onSave(dictionary.name, dictionary.email, dictionary.pacientNumber);
           }}
         >
-          Atualizar
+          Confirmar
         </IonButton>
       </IonCol>
       <IonCol size="6">
@@ -109,10 +109,13 @@ const Body: React.FC<{
           className="close-btn"
           expand="block"
           onClick={() => {
+            dictionary.name = changeName;
+            dictionary.email = changeEmail;
+            dictionary.pacientNumber = changePacientNumber;
             onDismiss();
           }}
         >
-          Close
+          Cancelar
         </IonButton>
       </IonCol>
     </IonRow>
@@ -130,20 +133,20 @@ const PersonalInfo: React.FC<ContainerProps> = ({
     useState<string>(pacientNumber);
 
   const handleDismiss = () => {
-    if (!trigerCloseWinfo) {
-      trigerName = false;
-      trigerEmail = false;
-      trigerPatientNumber = false;
-    }
     dismiss();
     trigerCloseWinfo = false;
   };
 
   const handleSave = () => {
-    if (trigerName || trigerEmail || trigerPatientNumber) {
-      setChangeName(name);
-      setChangeEmail(email);
-      setChangePacientNumber(pacientNumber);
+    if(trigerName||trigerEmail||trigerPatientNumber){
+      console.log(trigerEmail)
+      if(trigerName)
+        setChangeName(dictionary.name);
+      if(trigerEmail)
+        setChangeEmail(dictionary.email);
+      if(trigerPatientNumber)
+        setChangePacientNumber(dictionary.pacientNumber);
+      dismiss();
       presentToast("Informações Atualizadas!", 3000);
       trigerCloseWinfo = true;
     }
@@ -164,26 +167,26 @@ const PersonalInfo: React.FC<ContainerProps> = ({
 
   return (
     <IonGrid>
-      <IonRow>
-        <IonText className="per-info-header" style={{ fontSize: 20 }}>
-          INFORMAÇÕES PESSOAIS
+
+<Card style={{ width: '100%' }}>
+  <Card.Body>
+    <Card.Title className="card-title">INFORMAÇÕES PESSOAIS</Card.Title>
+    <Card.Text>
+    <IonRow>
+        <IonText className="info" style={{ fontSize: 17 }}>
+          <p>Nome do Utilizador: {trigerName ? changeName:name}</p>
         </IonText>
       </IonRow>
       <IonRow>
-        <IonText className="info" style={{ fontSize: 15 }}>
-          <p>Nome do Utilizador: {trigerName ? dictionary.name : name}</p>
+        <IonText className="info" style={{ fontSize: 17 }}>
+          <p>Email: {trigerEmail?changeEmail:email}</p>
         </IonText>
       </IonRow>
       <IonRow>
-        <IonText className="info" style={{ fontSize: 15 }}>
-          <p>Email: {trigerEmail ? dictionary.email : email}</p>
-        </IonText>
-      </IonRow>
-      <IonRow>
-        <IonText className="info" style={{ fontSize: 15 }}>
+        <IonText className="info" style={{ fontSize: 17 }}>
           <p>
             Número de Utente:{" "}
-            {trigerPatientNumber ? dictionary.pacientNumber : pacientNumber}
+            {trigerPatientNumber?changePacientNumber:pacientNumber}
           </p>
         </IonText>
       </IonRow>
@@ -198,6 +201,10 @@ const PersonalInfo: React.FC<ContainerProps> = ({
           Editar
         </IonButton>
       </IonRow>
+    </Card.Text>
+  </Card.Body>
+</Card>
+      
     </IonGrid>
   );
 };
