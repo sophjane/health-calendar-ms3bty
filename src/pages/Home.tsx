@@ -8,8 +8,6 @@ import {
   IonLabel,
   IonHeader,
   IonPage,
-  IonChip,
-  IonAvatar,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import Toolbar from "../components/Toolbar";
@@ -32,8 +30,10 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
         <IonGrid>
           <IonRow className="ion-justify-content-end">
             <IonCol className="person-name d-flex align-items-center justify-content-end">
-              Bem vind{genderNoun}
-              <IonText> {personDetails.name} </IonText>👋🏻
+              <strong>
+                Bem vind{genderNoun}
+                <IonText> {personDetails.name} </IonText>👋🏻
+              </strong>
             </IonCol>
           </IonRow>
           <IonRow className="d-flex flex-grow-1 justify-content-center flex-column align-items-center ">
@@ -52,7 +52,7 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
           </IonRow>
           <IonRow className="d-flex justify-content-center my-3 pt-3 mx-auto button-row">
             <IonButton
-              color="danger"
+              color="primary"
               onClick={() => history.push("/videocall")}
             >
               <IonLabel>Video-Chamada</IonLabel>

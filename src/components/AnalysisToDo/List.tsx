@@ -104,7 +104,7 @@ const List: React.FC<AnalysisProps> = ({ type }) => {
       <IonList>
         <IonText>
           <div className="unread-header">
-            <strong>{count} Unread</strong>
+            <strong>{count} não lidas</strong>
           </div>
           <hr></hr>
         </IonText>
