@@ -14,8 +14,12 @@ import {
   IonText} from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import Toolbar from '../components/Toolbar'
+import {useContext, useState} from 'react'
+import {UserContext} from '../App'
 
 const CreateAccount: React.FC<RouteComponentProps> = ({history}) => {
+  const user = useContext(UserContext);
+
   return (
     <IonPage>
       <IonHeader>
@@ -46,7 +50,7 @@ const CreateAccount: React.FC<RouteComponentProps> = ({history}) => {
                     </IonItem>
                 </IonRow>
                 <IonRow className="d-flex justify-content-center">
-                    <IonButton className="col-md-4 my-2" onClick={() => history.push("/login")}><IonLabel>Criar Conta</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" onClick={() => {history.push("/login"); user.setCreateAcc(0)}}><IonLabel>Criar Conta</IonLabel></IonButton>
                 </IonRow>
             </IonGrid>
       </IonContent>

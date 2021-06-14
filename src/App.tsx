@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import React, {useState} from "react"
 import {
   IonApp,
   IonIcon,
@@ -7,6 +8,7 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  RouteManagerContext,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import {
@@ -17,15 +19,9 @@ import {
 } from "ionicons/icons";
 
 import Login from './pages/Login'
-import Home from "./pages/Home";
-import Appointments from "./pages/Appointments";
-import Analysis from "./pages/Analysis";
-import Settings from "./pages/Settings";
-import CreateAppointment from "./pages/CreateAppointment";
 import CreateAccount from './pages/CreateAccount'
-import CreateAnalysis from "./pages/CreateAnalysis";
-import AnalysisToDo from "./pages/AnalysisToDo";
-import AnalysisResults from "./pages/AnalysisResults";
+import MainApp from './MainApp'
+
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -47,85 +43,42 @@ import "@ionic/react/css/display.css";
 import "./App.css";
 import "./theme/variables.css";
 
-const App: React.FC = () => (
+interface IUserManager {
+  setIsLoggedIn : Function;
+  setCreateAcc : Function;
+}
+const user: IUserManager = {
+  setIsLoggedIn : () =>{},
+  setCreateAcc : () =>{}
+}
+export const UserContext = React.createContext<IUserManager>(user);
+
+const IonicApp: React.FC = () => {
+ const [isLoggedIn, setIsLoggedIn] = useState(false);
+ const [createAcc, setCreateAcc] = useState(0);
+ const currPage = [
+                    Login,
+                    CreateAccount
+                  ]
+
+ user.setIsLoggedIn = setIsLoggedIn;
+ user.setCreateAcc = setCreateAcc;
+  return(
   <IonApp>
     <IonReactRouter>
-    
-    <IonTabs>
-        <IonRouterOutlet>
-        <Route exact path="/login"
-            render={(props) => <Login {...props}/>}></Route>
-              <Route
-            exact
-            path="/create-account"
-            render={(props) => <CreateAccount {...props} />}
-          >
-          </Route>
-          <Route exact path="/Home"
-          render={(props)=> <Home {...props}/>}
-          >
-            
-          </Route>
-          <Route
-            exact
-            path="/appointments"
-            render={(props) => <Appointments {...props} />}
-          ></Route>
-          <Route
-            exact
-            path="/appointments/createAppointment"
-            render={(props) => <CreateAppointment {...props} />}
-          ></Route>
-          <Route
-            exact
-            path="/appointments/createAnalysis"
-            render={(props) => <CreateAnalysis {...props} />}
-          ></Route>
-          <Route
-            path="/Analysis"
-            render={(props) => <Analysis {...props} />}
-          ></Route>
-          <Route
-            exact
-            path="/Analysis/analysisToDo"
-            render={(props) => <AnalysisToDo {...props} />}
-          ></Route>
-          <Route
-            exact
-            path="/Analysis/analysisResults"
-            render={(props) => <AnalysisResults {...props} />}
-          ></Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/login" />
-          </Route>
-        </IonRouterOutlet>
-        
-        
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Página Inicial</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="appointments" href="/appointments">
-            <IonIcon icon={calendarOutline} />
-            <IonLabel>Consultas</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="analysis" href="/analysis">
-            <IonIcon icon={readerOutline} />
-            <IonLabel>Análises</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="settings" href="/settings">
-            <IonIcon icon={settingsOutline} />
-            <IonLabel>Definições</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-
+    <Route path="/login" render={(props) => <Login {...props} />} exact={true} />
+    <Route path="/create-account" render={(props) => <CreateAccount {...props}></CreateAccount>}/>
+        <Route path="/" component={isLoggedIn ? MainApp : currPage[createAcc]} />
     </IonReactRouter>
   </IonApp>
-);
+)};
+
+const App :React.FC = () => {
+  return (
+    <UserContext.Provider value = {user}> 
+      <IonicApp/>
+    </UserContext.Provider>
+  )
+}
 
 export default App;

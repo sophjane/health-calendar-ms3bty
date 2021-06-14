@@ -17,7 +17,8 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { person, key } from 'ionicons/icons';
 import { RouteComponentProps,  } from 'react-router';
-import {useState} from 'react'
+import {useContext, useState} from 'react'
+import {UserContext} from '../App'
 
 
 const Login: React.FC<RouteComponentProps> = ({history}) => {
@@ -35,6 +36,7 @@ const Login: React.FC<RouteComponentProps> = ({history}) => {
   }
 
   const [isOpen, setIsOpen] = useState(false);
+  const user = useContext(UserContext);
 
   return (
     <IonPage>
@@ -51,23 +53,23 @@ const Login: React.FC<RouteComponentProps> = ({history}) => {
                 <IonRow className="d-flex flex-column mt-3 mb-3">
                     <IonItem>
                         <IonLabel position="stacked"><IonIcon icon={person}/> Email</IonLabel>
-                        <IonInput value={loginInfo.email} clearInput> </IonInput>
+                        <IonInput type="email" clearInput> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked"><IonIcon icon={key}/> Palavra-Passe</IonLabel>
-                        <IonInput value={loginInfo.password} clearInput> </IonInput>
+                        <IonInput type="password" clearInput> </IonInput>
                     </IonItem>
                 </IonRow>
                 <IonRow className="d-flex justify-content-end mb-3">
                     <IonText className="mr-3" style={{fontSize:"small"}}>Esqueci-me da palavra-passe</IonText>
                 </IonRow>
                 <IonRow className="d-flex justify-content-between">
-                    <IonButton className="col-md-4 my-2" onClick={() => {setIsOpen(true); console.log(window.location.href)}}><IonLabel>Entrar</IonLabel></IonButton>
-                    <IonButton className="col-md-4 my-2" onClick={() => history.push("/create-account")}><IonLabel>Criar Conta</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" onClick={() => {setIsOpen(true);}}><IonLabel>Entrar</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" onClick={() => {history.push("/create-account");user.setCreateAcc(1)}}><IonLabel>Criar Conta</IonLabel></IonButton>
                 </IonRow>
                 <IonAlert
           isOpen={isOpen}
-          onDidDismiss={() => history.push("/home")}
+          onDidDismiss={() => {history.push("/home"); user.setIsLoggedIn(true);}}
           cssClass="help-alert"
           header={"Guardar Dados?"}
           message={"Ao clicar em 'Sim' não precisará inserir os dados de inicio novamente."}
