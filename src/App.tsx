@@ -84,17 +84,18 @@ const App: React.FC = () => (
             render={(props) => <CreateAnalysis {...props} />}
           ></Route>
           <Route
-            path="/Analysis"
+            exact
+            path="/analysis"
             render={(props) => <Analysis {...props} />}
           ></Route>
           <Route
             exact
-            path="/Analysis/analysisToDo"
+            path="/analysis/analysisToDo"
             render={(props) => <AnalysisToDo {...props} />}
           ></Route>
           <Route
             exact
-            path="/Analysis/analysisResults"
+            path="/analysis/analysisResults"
             render={(props) => <AnalysisResults {...props} />}
           ></Route>
           <Route path="/settings">
