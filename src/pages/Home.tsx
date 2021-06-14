@@ -8,6 +8,8 @@ import {
   IonLabel,
   IonHeader,
   IonPage,
+  IonChip,
+  IonAvatar,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router";
 import Toolbar from "../components/Toolbar";
@@ -25,15 +27,13 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
     <IonPage>
       <IonContent fullscreen>
         <IonHeader>
-          <Toolbar variant="logo" title="Página Inicial"></Toolbar>
+          <Toolbar variant="logo" title="Health Calendar"></Toolbar>
         </IonHeader>
         <IonGrid>
           <IonRow className="ion-justify-content-end">
             <IonCol className="person-name d-flex align-items-center justify-content-end">
-              <strong>
-                Bem vind{genderNoun}{" "}
-                <IonText color="primary">{personDetails.name}</IonText>
-              </strong>
+              Bem vind{genderNoun}
+              <IonText> {personDetails.name} </IonText>👋🏻
             </IonCol>
           </IonRow>
           <IonRow className="d-flex flex-grow-1 justify-content-center flex-column align-items-center ">
