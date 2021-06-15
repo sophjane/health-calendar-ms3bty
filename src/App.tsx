@@ -18,11 +18,10 @@ import {
   settingsOutline,
 } from "ionicons/icons";
 
+
 import Login from './pages/Login'
 import CreateAccount from './pages/CreateAccount'
 import MainApp from './MainApp'
-
-
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
