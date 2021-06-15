@@ -16,13 +16,13 @@ import {
   settingsOutline,
 } from "ionicons/icons";
 
-import Login from './pages/Login'
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Appointments from "./pages/Appointments";
 import Analysis from "./pages/Analysis";
 import Settings from "./pages/Settings";
 import CreateAppointment from "./pages/CreateAppointment";
-import CreateAccount from './pages/CreateAccount'
+import CreateAccount from "./pages/CreateAccount";
 import CreateAnalysis from "./pages/CreateAnalysis";
 import AnalysisToDo from "./pages/AnalysisToDo";
 import AnalysisResults from "./pages/AnalysisResults";
@@ -51,22 +51,23 @@ import "./theme/variables.css";
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-    
-    <IonTabs>
+      <IonTabs>
         <IonRouterOutlet>
-        <Route exact path="/login"
-            render={(props) => <Login {...props}/>}></Route>
-              <Route
+          <Route
+            exact
+            path="/login"
+            render={(props) => <Login {...props} />}
+          ></Route>
+          <Route
             exact
             path="/create-account"
             render={(props) => <CreateAccount {...props} />}
-          >
-          </Route>
-          <Route exact path="/Home"
-          render={(props)=> <Home {...props}/>}
-          >
-            
-          </Route>
+          ></Route>
+          <Route
+            exact
+            path="/Home"
+            render={(props) => <Home {...props} />}
+          ></Route>
           <Route
             exact
             path="/appointments"
@@ -83,17 +84,18 @@ const App: React.FC = () => (
             render={(props) => <CreateAnalysis {...props} />}
           ></Route>
           <Route
-            path="/Analysis"
+            exact
+            path="/analysis"
             render={(props) => <Analysis {...props} />}
           ></Route>
           <Route
             exact
-            path="/Analysis/analysisToDo"
+            path="/analysis/analysisToDo"
             render={(props) => <AnalysisToDo {...props} />}
           ></Route>
           <Route
             exact
-            path="/Analysis/analysisResults"
+            path="/analysis/analysisResults"
             render={(props) => <AnalysisResults {...props} />}
           ></Route>
           <Route path="/settings">
@@ -104,12 +106,11 @@ const App: React.FC = () => (
           </Route>
           <Route
             exact
-            path="/home/videocall"
+            path="/videocall"
             render={(props) => <VideoCall {...props} />}
           ></Route>
         </IonRouterOutlet>
-        
-        
+
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
@@ -129,7 +130,6 @@ const App: React.FC = () => (
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
-
     </IonReactRouter>
   </IonApp>
 );
