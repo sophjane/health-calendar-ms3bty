@@ -101,33 +101,27 @@ const List: React.FC<AnalysisProps> = ({ type }) => {
 
   return (
     <IonGrid>
-      <IonList>
-        <IonText>
-          <div className="unread-header">
-            <strong>{count} não lidas</strong>
-          </div>
-          <hr></hr>
-        </IonText>
-        {analysis.map((e, index) => (
-          <IonItem>
-            <div className={e.class} key={index}>
-              <IonRow
-                onClick={() => {
-                  setRead(index, e.class);
-                }}
-              >
-                <IonCol>
-                  <h5>{e.exam}</h5>
-                  <p className="speciality">{e.speciality}</p>
-                </IonCol>
-                <IonCol>
-                  <h6 className="date">{e.date}</h6>
-                </IonCol>
-              </IonRow>
-            </div>
-          </IonItem>
-        ))}
-      </IonList>
+        <IonList>
+            <IonText>
+                <div  className = "unread-header"><strong>{count} Não Lidas</strong></div>
+                <hr className="hr-color"></hr>
+            </IonText>
+            {analysis.map((e, index) => (
+                <IonItem  >
+                    <div className={e.class} key={index}  >
+                        <IonRow onClick={() => {setRead(index, e.class)}}>
+                            <IonCol>
+                                <h5>{e.exam}</h5>
+                                <p className="speciality">{e.speciality}</p>
+                            </IonCol>
+                            <IonCol>
+                                <h6 className="date">{e.date}</h6>
+                            </IonCol>
+                        </IonRow>
+                    </div>
+                </IonItem>
+            ))}
+        </IonList>
     </IonGrid>
   );
 };
