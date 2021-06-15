@@ -38,7 +38,7 @@ const Model: React.FC<{
       <IonInput className="info"
       type="password" 
       placeholder="Nova palavra-passe..."
-      value={changePassword}  onIonChange={(e) => {password = (e.target as HTMLInputElement).value; trigerPassword = true} }></IonInput>
+      value={changePassword}  onIonChange={(e) => {password = (e.target as HTMLInputElement).value; trigerPassword = true;} }></IonInput>
     </IonItem>
     <IonRow>
       <IonText className="input-title"><strong>Confirmar Nova Palavra Passe</strong></IonText>
@@ -53,15 +53,15 @@ const Model: React.FC<{
           <IonCol size="6">
         <IonButton className="submit-btn" expand="block" onClick={() => {
           onSave(password, changePassword)}}>
-            Atualizar
+            Alterar
         </IonButton>
         </IonCol>
         <IonCol size="6">
         <IonButton className="close-btn" expand="block" onClick={() => onDismiss()}>
-            Close
+            Cancelar
         </IonButton>
         </IonCol>
-        </IonRow>
+    </IonRow>
   </div>
 );
 
@@ -71,7 +71,7 @@ const Buttons: React.FC = () => {
       dismiss();
     }
     const handlesave = () => {
-      if (trigerPassword && trigerConfirmation){
+      if (trigerPassword && trigerConfirmation && password!==''){
         if(password.length >3 ){
           if (password === checkPassword){
               console.log(password);
@@ -100,18 +100,23 @@ const Buttons: React.FC = () => {
 
 
     const cities = [
-      'Aveiro', 'Coimbra'
+      'Almada', 'Aveiro', 'Barcelos', 'Coimbra', 'Fig. Foz', 'Lisboa', 'Ovar', 'Porto'
     ]
 
     const hospitals = {
+      'Almada' : ['Garcia de Orta'],
       'Aveiro' : ['Centro Hospitalar Baixo Vouga', 'Hospital da Luz', 'Hospital Infante D. Pedro'],
-      'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF']
+      'Barcelos' : ["Sta. Maria Maior"],
+      'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF'],
+      'Fig. Foz' : ["Distrital da Figueira da Foz"],
+      'Lisboa' : ['Forças Armadas - Pólo de Lisboa'],
+      'Ovar' : ['Dr. Francisco Zagalo'],
+      'Porto' : ["Magalhães Lemos", 'S. João']
     }
-    const [city, setCity] = useState<string>(cities[0]);
-    const [hospital, setHospital] = useState<string>(hospitals.Aveiro[0]);
+    var [city, setCity] = useState<string>(cities[0]);
+    const [hospital, setHospital] = useState<string>(hospitals.Almada[0]);
     var display = null;
 
-    
 
     var passwordButton = (     
       <IonButton expand="block"
@@ -122,43 +127,54 @@ const Buttons: React.FC = () => {
               Alterar Palavra Passe
             </IonButton>
     )
-
-    if (city === 'Aveiro' ){
-        display = (
-          <IonList>
-            <IonItem>
-            <IonLabel>Hospital em {city}</IonLabel>
-            <IonSelect value={hospital} okText="Okay" cancelText="Dismiss" onIonChange={e => setHospital(e.detail.value)}>
-            {hospitals.Aveiro.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))}
-            </IonSelect>
-            </IonItem>
-          </IonList>
-        );
+    
+    switch(city){
+      case('Aveiro' ):
+        display =hospitals.Aveiro.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>));
+        break;
+      case('Almada'):
+        display = hospitals.Almada.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
+      case('Barcelos'):
+        display = hospitals.Barcelos.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
+      case ('Coimbra'):
+        display = hospitals.Coimbra.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
+      case('Fig. Foz'):
+        display = hospitals['Fig. Foz'].map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
+      case('Lisboa'):
+        display = hospitals.Lisboa.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
+      case('Ovar'):
+        display = hospitals.Ovar.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>));
+        break;
+      case('Porto'):
+        display = hospitals.Porto.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))
+        break;
     }
-    else if (city === 'Coimbra'){
-      display = (
-        <IonList>
-          <IonItem>
-            <IonLabel>Hospital em {city}</IonLabel>
-            <IonSelect value={hospital} okText="Okay" cancelText="Dismiss" onIonChange={e => setHospital(e.detail.value)}>
-              {hospitals.Coimbra.map((h, index) => (<IonSelectOption key={index} value={h}>{h}</IonSelectOption>))}
-              </IonSelect>
-          </IonItem>
-        </IonList>
-      )
-    }
+    
     return (
       <>
       {passwordButton}
         <IonList>
           <IonItem>
             <IonLabel>Cidade</IonLabel>
-              <IonSelect value={city} okText="Okay" cancelText="Dismiss" onIonChange={e => setCity(e.detail.value)}>
+              <IonSelect value={city} okText="Ok" cancelText="Cancelar" onIonChange={e => {setCity(e.detail.value); setHospital("null");}}>
                 {cities.map((c, index) => (<IonSelectOption key={index} value={c}>{c}</IonSelectOption>))}
               </IonSelect>
             </IonItem>
         </IonList>
-        {display}
+        
+        <IonList>
+          <IonItem>
+            <IonLabel>Hospital em {city}</IonLabel>
+            <IonSelect value={hospital} okText="Ok" cancelText="Cancelar" onIonChange={e => setHospital(e.detail.value)}>
+              {display}
+              </IonSelect>
+          </IonItem>
+        </IonList>
       </>
     );
 }
