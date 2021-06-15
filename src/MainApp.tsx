@@ -26,6 +26,7 @@ import CreateAppointment from "./pages/CreateAppointment";
 import CreateAnalysis from "./pages/CreateAnalysis";
 import AnalysisToDo from "./pages/AnalysisToDo";
 import AnalysisResults from "./pages/AnalysisResults";
+import VideoCall from "./pages/VideoCall";
 const MainApp: React.FC = () => {
     return (
         <div>
@@ -67,6 +68,11 @@ const MainApp: React.FC = () => {
                     <Route path="/settings">
                         <Settings />
                     </Route>
+                    <Route
+                        exact
+                        path="/videocall"
+                        render={(props) => <VideoCall {...props} />}
+                    ></Route>
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
                     <IonTabButton tab="home" href="/home">
