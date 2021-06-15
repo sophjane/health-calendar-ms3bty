@@ -45,10 +45,50 @@ import "./theme/variables.css";
 interface IUserManager {
   setIsLoggedIn : Function;
   setCreateAcc : Function;
+  userInfo : {
+    "Nome":String,
+    "Email":String,
+    "Password":String,
+    "NumUtente":Number,
+    "Cidade":String,
+    "Hospital":String
+  },
+  setUserInfo : Function;
+  cityList : Array<String>;
+  hospitalList: {
+    'Almada' : ['Garcia de Orta'],
+    'Aveiro' : ['Centro Hospitalar Baixo Vouga', 'Hospital da Luz', 'Hospital Infante D. Pedro'],
+    'Barcelos' : ["Sta. Maria Maior"],
+    'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF'],
+    'Fig. Foz' : ["Distrital da Figueira da Foz"],
+    'Lisboa' : ['Forças Armadas - Pólo de Lisboa'],
+    'Ovar' : ['Dr. Francisco Zagalo'],
+    'Porto' : ["Magalhães Lemos", 'S. João']
+   };
 }
 const user: IUserManager = {
   setIsLoggedIn : () =>{},
-  setCreateAcc : () =>{}
+  setCreateAcc : () =>{},
+  userInfo : {
+    "Nome":"",
+    "Email":"",
+    "Password":"",
+    "NumUtente":0,
+    "Cidade":"",
+    "Hospital":""
+  },
+  setUserInfo: () =>{},
+  cityList: [],
+  hospitalList: {
+    'Almada' : ['Garcia de Orta'],
+    'Aveiro' : ['Centro Hospitalar Baixo Vouga', 'Hospital da Luz', 'Hospital Infante D. Pedro'],
+    'Barcelos' : ["Sta. Maria Maior"],
+    'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF'],
+    'Fig. Foz' : ["Distrital da Figueira da Foz"],
+    'Lisboa' : ['Forças Armadas - Pólo de Lisboa'],
+    'Ovar' : ['Dr. Francisco Zagalo'],
+    'Porto' : ["Magalhães Lemos", 'S. João']
+   },
 }
 export const UserContext = React.createContext<IUserManager>(user);
 
@@ -59,9 +99,19 @@ const IonicApp: React.FC = () => {
                     Login,
                     CreateAccount
                   ]
-
+ const [userInfo, setUserInfo] = useState({
+                    "Nome":"",
+                    "Email":"",
+                    "Password":"",
+                    "NumUtente":0,
+                    "Cidade":"",
+                    "Hospital":""
+                  })
  user.setIsLoggedIn = setIsLoggedIn;
  user.setCreateAcc = setCreateAcc;
+ user.setUserInfo = setUserInfo;
+ user.userInfo=userInfo;
+ user.cityList = ['Almada', 'Aveiro', 'Barcelos', 'Coimbra', 'Fig. Foz', 'Lisboa', 'Ovar', 'Porto'];
   return(
   <IonApp>
     <IonReactRouter>
