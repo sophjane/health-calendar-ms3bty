@@ -11,7 +11,8 @@ import {
   IonInput,
   IonIcon, 
   IonButton,
-  IonText} from '@ionic/react';
+  IonText,
+  useIonToast} from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import Toolbar from '../components/Toolbar'
 import {useContext, useState} from 'react'
@@ -19,7 +20,20 @@ import {UserContext} from '../App'
 
 const CreateAccount: React.FC<RouteComponentProps> = ({history}) => {
   const user = useContext(UserContext);
-
+  const [pass, setPass] = useState(false);
+  const [password, setPassword] = useState("");
+  const [present] = useIonToast();
+  const checkPassword = (e: Event) => {
+    const confPassword = (e.target as HTMLInputElement).value;
+    if(confPassword.length >= password.length){
+      if(confPassword != password){
+          console.log(password)
+          console.log(confPassword)
+      }else{
+        setPass(true);
+      }
+    }
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -42,7 +56,11 @@ const CreateAccount: React.FC<RouteComponentProps> = ({history}) => {
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked"> Palavra-Passe</IonLabel>
-                        <IonInput placeholder="Palavra-Passe" type="password" clearInput> </IonInput>
+                        <IonInput placeholder="Palavra-Passe" type="password" onIonChange={(e)=>setPassword((e.target as HTMLInputElement).value)} clearInput> </IonInput>
+                    </IonItem>
+                    <IonItem>
+                        <IonLabel position="stacked">Confirmar Palavra-Passe</IonLabel>
+                        <IonInput placeholder="Palavra-Passe" type="password" onIonChange={(e)=> {checkPassword(e)}} clearInput> </IonInput>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="stacked"> Número do Utente</IonLabel>
@@ -50,7 +68,15 @@ const CreateAccount: React.FC<RouteComponentProps> = ({history}) => {
                     </IonItem>
                 </IonRow>
                 <IonRow className="d-flex justify-content-center">
-                    <IonButton className="col-md-4 my-2" onClick={() => {history.push("/login"); user.setCreateAcc(0)}}><IonLabel>Criar Conta</IonLabel></IonButton>
+                    <IonButton className="col-md-4 my-2" 
+                    onClick={() => 
+                    {if(pass){
+                      history.push("/login"); 
+                      user.setCreateAcc(0)
+                      }else{
+                        present("Passwords must match",2000)
+                      }
+                      }}><IonLabel>Criar Conta</IonLabel></IonButton>
                 </IonRow>
             </IonGrid>
       </IonContent>
