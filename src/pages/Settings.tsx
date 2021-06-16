@@ -1,6 +1,5 @@
 import { IonContent, IonGrid, IonHeader, IonPage } from "@ionic/react";
 import PersonalInfo from "../components/Definicoes/PersonalInfo";
-import Info from "../components/Definicoes/Info";
 import Buttons from "../components/Definicoes/Buttons";
 import Reminder from "../components/Definicoes/Reminder";
 

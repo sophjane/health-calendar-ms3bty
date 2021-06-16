@@ -26,6 +26,7 @@ import CreateAppointment from "./pages/CreateAppointment";
 import CreateAnalysis from "./pages/CreateAnalysis";
 import AnalysisToDo from "./pages/AnalysisToDo";
 import AnalysisResults from "./pages/AnalysisResults";
+import VideoCall from "./pages/VideoCall";
 const MainApp: React.FC = () => {
     return (
         <div>
@@ -51,22 +52,27 @@ const MainApp: React.FC = () => {
                         render={(props) => <CreateAnalysis {...props} />}
                     ></Route>
                     <Route
-                        path="/Analysis"
+                        exact
+                        path="/analysis"
                         render={(props) => <Analysis {...props} />}
                     ></Route>
                     <Route
-                        exact
-                        path="/Analysis/analysisToDo"
+                        path="/analysis/analysis-to-do"
                         render={(props) => <AnalysisToDo {...props} />}
                     ></Route>
                     <Route
                         exact
-                        path="/Analysis/analysisResults"
+                        path="/analysis/analysis-results"
                         render={(props) => <AnalysisResults {...props} />}
                     ></Route>
                     <Route path="/settings">
                         <Settings />
                     </Route>
+                    <Route
+                        exact
+                        path="/videocall"
+                        render={(props) => <VideoCall {...props} />}
+                    ></Route>
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
                     <IonTabButton tab="home" href="/home">
