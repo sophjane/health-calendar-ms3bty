@@ -28,11 +28,11 @@ const Home: React.FC<RouteComponentProps> = ({ history }) => {
           <Toolbar variant="logo" title="Health Calendar"></Toolbar>
         </IonHeader>
         <IonGrid>
-          <IonRow className="ion-justify-content-end">
+          <IonRow className="ion-justify-content-end my-2">
             <IonCol className="person-name d-flex align-items-center justify-content-end">
               <strong>
                 Bem vind{genderNoun}
-                <IonText> {personDetails.name} </IonText>👋🏻
+                <IonText> {personDetails.name} 👋🏻</IonText>
               </strong>
             </IonCol>
           </IonRow>
