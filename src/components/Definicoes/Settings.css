@@ -1,15 +1,11 @@
-.per-info-header{
-    margin-left: auto;
-    margin-right: auto;
-    vertical-align: middle;
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
 .info{
     margin-left: auto;
     margin-right: auto;
     vertical-align: middle;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    text-align:center;
+    font-size: 17px;
 }
 
 .edit-btn{
@@ -24,12 +20,57 @@
     margin-left: auto;
     text-align:center;
     --ion-color-primary: #068B80;
-    margin-top: 10px;
+    margin-top: 20%;
 }
 
 .close-btn{
     margin-right: auto;
     text-align:center;
     --ion-color-primary: #068B80;
-    margin-top: 10px;
+    margin-top: 20%;
+    margin-bottom: 500%;
+}
+
+
+.model-header-text{
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    font-size: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-family: var(--ion-font-family, inherit);
+    text-align:center;
+}
+
+.model-header{
+    margin-top: 0%;
+    margin-bottom: 8%;
+    background-color: var(--ion-color-primary);
+    border-width: 0 0 0.55px;
+    color: var(--ion-toolbar-color, var(--ion-text-color, #000));
+    border-color: var(--ion-toolbar-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.2))));
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    min-height: 44px;
+    text-align:center;
+}
+
+.input-title{
+    margin-top: 15px;
+    font-size: 18px;
+    text-align:center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grey-background{
+    background-color:#f5f5f5;
+}
+
+.card-title{
+    color:#127780;
 }

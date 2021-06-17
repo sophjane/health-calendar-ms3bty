@@ -18,6 +18,7 @@
     "@types/react-router-dom": "^5.1.7",
     "bootstrap": "^4.6.0",
     "classnames": "^2.3.1",
+    "date-fns": "^2.21.3",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.6.0",

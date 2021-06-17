@@ -1,4 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
+import React, {useState} from "react"
 import {
   IonApp,
   IonIcon,
@@ -7,6 +8,7 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  RouteManagerContext,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import {
@@ -15,12 +17,11 @@ import {
   readerOutline,
   settingsOutline,
 } from "ionicons/icons";
-import Home from "./pages/Home";
-import Appointments from "./pages/Appointments";
-import Analysis from "./pages/Analysis";
-import Settings from "./pages/Settings";
-import CreateAppointment from "./pages/CreateAppointment";
 
+
+import Login from './pages/Login'
+import CreateAccount from './pages/CreateAccount'
+import MainApp from './MainApp'
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -38,59 +39,95 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
-import './theme/variables.css';
-import './App.css'
+import "./App.css";
+import "./theme/variables.css";
 
-const App: React.FC = () => (
+interface IUserManager {
+  setIsLoggedIn : Function;
+  setCreateAcc : Function;
+  userInfo : {
+    "Nome":String,
+    "Email":String,
+    "Password":String,
+    "NumUtente":Number,
+    "Cidade":String,
+    "Hospital":String
+  },
+  setUserInfo : Function;
+  cityList : Array<String>;
+  hospitalList: {
+    'Almada' : ['Garcia de Orta'],
+    'Aveiro' : ['Centro Hospitalar Baixo Vouga', 'Hospital da Luz', 'Hospital Infante D. Pedro'],
+    'Barcelos' : ["Sta. Maria Maior"],
+    'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF'],
+    'Fig. Foz' : ["Distrital da Figueira da Foz"],
+    'Lisboa' : ['Forças Armadas - Pólo de Lisboa'],
+    'Ovar' : ['Dr. Francisco Zagalo'],
+    'Porto' : ["Magalhães Lemos", 'S. João']
+   };
+}
+const user: IUserManager = {
+  setIsLoggedIn : () =>{},
+  setCreateAcc : () =>{},
+  userInfo : {
+    "Nome":"",
+    "Email":"",
+    "Password":"",
+    "NumUtente":0,
+    "Cidade":"",
+    "Hospital":""
+  },
+  setUserInfo: () =>{},
+  cityList: [],
+  hospitalList: {
+    'Almada' : ['Garcia de Orta'],
+    'Aveiro' : ['Centro Hospitalar Baixo Vouga', 'Hospital da Luz', 'Hospital Infante D. Pedro'],
+    'Barcelos' : ["Sta. Maria Maior"],
+    'Coimbra' : ['Centro Hospitalar Universitátio de Coimbra', 'Hospital CUF'],
+    'Fig. Foz' : ["Distrital da Figueira da Foz"],
+    'Lisboa' : ['Forças Armadas - Pólo de Lisboa'],
+    'Ovar' : ['Dr. Francisco Zagalo'],
+    'Porto' : ["Magalhães Lemos", 'S. João']
+   },
+}
+export const UserContext = React.createContext<IUserManager>(user);
+
+const IonicApp: React.FC = () => {
+ const [isLoggedIn, setIsLoggedIn] = useState(false);
+ const [createAcc, setCreateAcc] = useState(0);
+ const currPage = [
+                    Login,
+                    CreateAccount
+                  ]
+ const [userInfo, setUserInfo] = useState({
+                    "Nome":"",
+                    "Email":"",
+                    "Password":"",
+                    "NumUtente":0,
+                    "Cidade":"",
+                    "Hospital":""
+                  })
+ user.setIsLoggedIn = setIsLoggedIn;
+ user.setCreateAcc = setCreateAcc;
+ user.setUserInfo = setUserInfo;
+ user.userInfo=userInfo;
+ user.cityList = ['Almada', 'Aveiro', 'Barcelos', 'Coimbra', 'Fig. Foz', 'Lisboa', 'Ovar', 'Porto'];
+  return(
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/Home">
-            <Home />
-          </Route>
-          <Route
-            exact
-            path="/appointments"
-            render={(props) => <Appointments {...props} />}
-          ></Route>
-          <Route
-            exact
-            path="/appointments/create"
-            render={(props) => <CreateAppointment {...props} />}
-          ></Route>
-          <Route
-            path="/Analysis"
-            render={(props) => <Analysis {...props} />}
-          ></Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Página Inicial</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="appointments" href="/appointments">
-            <IonIcon icon={calendarOutline} />
-            <IonLabel>Consultas</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="analysis" href="/analysis">
-            <IonIcon icon={readerOutline} />
-            <IonLabel>Análises</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="settings" href="/settings">
-            <IonIcon icon={settingsOutline} />
-            <IonLabel>Definições</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+    <Route path="/login" render={(props) => <Login {...props} />} exact={true} />
+    <Route path="/create-account" render={(props) => <CreateAccount {...props}></CreateAccount>}/>
+        <Route path="/" component={isLoggedIn ? MainApp : currPage[createAcc]} />
     </IonReactRouter>
   </IonApp>
-);
+)};
+
+const App :React.FC = () => {
+  return (
+    <UserContext.Provider value = {user}> 
+      <IonicApp/>
+    </UserContext.Provider>
+  )
+}
 
 export default App;
