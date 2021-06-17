@@ -65,9 +65,11 @@ const MainApp: React.FC = () => {
                         path="/analysis/analysis-results"
                         render={(props) => <AnalysisResults {...props} />}
                     ></Route>
-                    <Route path="/settings">
-                        <Settings />
-                    </Route>
+                    <Route
+                        exact
+                        path="/settings"
+                        render={(props) => <Settings {...props}/>}
+                    ></Route>
                     <Route
                         exact
                         path="/videocall"
