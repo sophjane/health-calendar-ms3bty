@@ -3,11 +3,12 @@ import PersonalInfo from "../components/Definicoes/PersonalInfo";
 import Buttons from "../components/Definicoes/Buttons";
 import Reminder from "../components/Definicoes/Reminder";
 import { RouteComponentProps } from "react-router";
-import {Route } from "react-router-dom";
+import {UserContext} from '../App'
+import {useContext} from 'react'
 
 import Toolbar from "../components/Toolbar";
 
-const userDetails: React.FC<RouteComponentProps> = ({ history }) => {
+const Settings: React.FC<RouteComponentProps> = ({ history }) => {
   /* const onSave = (nameP: string, email: string, pacientNumber: string) => {
     personDetails.name = nameP;
     personDetails.email = email;
@@ -20,11 +21,12 @@ const userDetails: React.FC<RouteComponentProps> = ({ history }) => {
     email: "joanasilva@gmail.com",
     pacientNumber: "123456789",
   };
+  const user = useContext(UserContext);
   var logOutButton = (
     <IonButton
         className="edit-btn"
         expand="block"
-        onClick={() => history.push("/login")}>
+        onClick={() => {history.push("/login"); user.setIsLoggedIn(false);}}>
             Terminar Sessão
     </IonButton>
   )
@@ -45,4 +47,4 @@ const userDetails: React.FC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default userDetails;
+export default Settings;
