@@ -19,6 +19,7 @@ import { person, key } from 'ionicons/icons';
 import { RouteComponentProps,  } from 'react-router';
 import {useContext, useState} from 'react'
 import {UserContext} from '../App'
+import Toolbar from '../components/Toolbar';
 
 
 const Login: React.FC<RouteComponentProps> = ({history}) => {
@@ -41,10 +42,8 @@ const Login: React.FC<RouteComponentProps> = ({history}) => {
   return (
     <IonPage>
         <IonHeader>
-            <IonToolbar>
-                <IonTitle>Login</IonTitle>
-            </IonToolbar>
-        </IonHeader>
+        <Toolbar title="Login"></Toolbar>
+      </IonHeader>
         <IonContent fullscreen>
             <IonGrid>
                 <IonRow className="d-flex justify-content-center mt-5 mb-3">

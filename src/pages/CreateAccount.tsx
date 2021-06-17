@@ -194,6 +194,16 @@ const CreateAccount: React.FC<RouteComponentProps> = ({ history }) => {
             >
               <IonLabel>Criar Conta</IonLabel>
             </IonButton>
+            <IonButton
+              className="col-md-4 my-2"
+              onClick={() => {
+                  history.push("/login");
+                  user.setCreateAcc(0);
+                }
+              }
+            >
+              <IonLabel>Cancelar</IonLabel>
+            </IonButton>
           </IonRow>
         </IonGrid>
       </IonContent>
