@@ -110,8 +110,14 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
             </IonItem>
           </IonList>
           {/* TODO: fazer onClick */}
-          <DateButton onClick={setIsDisplayed} isDisplayed={isDisplayed}></DateButton>
-            <SchedulePopup onClick={setIsDisplayed} isDisplayed={isDisplayed}></SchedulePopup>
+          <DateButton
+            onClick={setIsDisplayed}
+            isDisplayed={isDisplayed}
+          ></DateButton>
+          <SchedulePopup
+            onClick={setIsDisplayed}
+            isDisplayed={isDisplayed}
+          ></SchedulePopup>
           <IonButton
             className="schedule-btn"
             size="large"
@@ -128,8 +134,7 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
               {
                 text: "SIM",
                 handler: () => {
-                  // TODO: Redirecionar para definições
-                  console.log("Sim");
+                  history.push("/settings");
                 },
               },
               {
