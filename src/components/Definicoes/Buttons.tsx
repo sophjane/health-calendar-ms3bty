@@ -78,6 +78,7 @@ const Buttons: React.FC = () => {
               presentToast('Palavra passe mudada com sucesso!', 3000)
               trigerPassword = false;
               trigerConfirmation = false;
+              dismiss();
           }else{
             presentToast('Escreva a mesma palavra-passe!', 3000)
           }
