@@ -10,9 +10,10 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
 import { RouteComponentProps } from "react-router";
 import "./CreateAppointment.css";
+import {UserContext} from '../App';
 import Layout from "../components/Layout";
 import DateButton from "../components/DateButton";
 import SchedulePopup from "../components/SchedulePopup";
@@ -35,22 +36,7 @@ const dummyTypeAppointment = [
   { value: "videochamada", label: "Videochamada" },
 ];
 
-const dummyHospital = [
-  { value: "Dr. Francisco Zagalo", label: "Dr. Francisco Zagalo" },
-  { value: "Sta. Maria Maior", label: "Sta. Maria Maior" },
-  { value: "S. João", label: "S. João" },
-  {
-    value: "Distrital da Figueira da Foz",
-    label: "Distrital da Figueira da Foz",
-  },
-  { value: "Magalhães Lemos", label: "Magalhães Lemos" },
-  { value: "Garcia de Orta", label: "Garcia de Orta" },
-  { value: "Luz", label: "Luz" },
-  {
-    value: "Forças Armadas - Pólo de Lisboa",
-    label: "Forças Armadas - Pólo de Lisboa",
-  },
-];
+
 const dummyDoctor = [
   { value: "Dr. Artur Ravara", label: "Dr. Artur Ravara" },
   { value: "Dr. Cândido Pinto", label: "Dr. Cândido Pinto" },
@@ -70,8 +56,53 @@ const dummyDoctor = [
 
 const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
   const [form, setFormValue] = useState({});
+  const user = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const [selHospital, setSelHospital] = useState([""]);
+const [index, setIndex] = useState(0);
+
+  const setSelectedCity = (city: String) => {
+    switch (city) {
+      case "Aveiro":
+        setSelHospital(user.hospitalList.Aveiro);
+        setIndex(1);
+        break;
+      case "Almada":
+        setSelHospital(user.hospitalList.Almada);
+        setIndex(0);
+        break;
+      case "Barcelos":
+        setSelHospital(user.hospitalList.Barcelos);
+        setIndex(2);
+        break;
+      case "Coimbra":
+        setSelHospital(user.hospitalList.Coimbra);
+        setIndex(3);
+        break;
+      case "Fig. Foz":
+        setSelHospital(user.hospitalList["Fig. Foz"]);
+        setIndex(4);
+  
+        break;
+      case "Lisboa":
+        setSelHospital(user.hospitalList.Lisboa);
+        setIndex(5);
+  
+        break;
+      case "Ovar":
+        setSelHospital(user.hospitalList.Ovar);
+        setIndex(6);
+  
+        break;
+      case "Porto":
+        setSelHospital(user.hospitalList.Porto);
+        setIndex(7);
+  
+        break;
+    }
+  }
+  const setSelectedHospital = (e: String) => {};
 
   console.log(form);
   return (
@@ -116,21 +147,34 @@ const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
                 ))}
               </IonSelect>
             </IonItem>
-            <IonItem className="appointment-select">
-              <IonLabel>Hospital</IonLabel>
-              <IonSelect
-                onIonChange={(e) => {
-                  setFormValue((s) => ({ ...s, hospital: e.detail.value }));
-                  console.log(e);
-                }}
-              >
-                {dummyHospital.map((e, i) => (
-                  <IonSelectOption key={i} value={e.value}>
-                    {e.label}
-                  </IonSelectOption>
-                ))}
-              </IonSelect>
-            </IonItem>
+              <IonItem className="appointment-select">
+                <IonLabel>Escolha a Cidade</IonLabel>
+                <IonSelect
+                  okText="Ok"
+                  cancelText="Cancelar"
+                  onIonChange={(e) => setSelectedCity(e.detail.value)}
+                >
+                  {user.cityList.map((city, ind) => (
+                    <IonSelectOption key={ind} value={city}>
+                      {city}
+                    </IonSelectOption>
+                  ))}
+                </IonSelect>
+              </IonItem>
+              <IonItem className="appointment-select">
+                <IonLabel>Escolha o Hospital</IonLabel>
+                <IonSelect
+                  okText="Ok"
+                  cancelText="Cancelar"
+                  onIonChange={(e) => setSelectedHospital(e.detail.value)}
+                >
+                  {selHospital.map((h, ind) => (
+                    <IonSelectOption key={ind} value={h}>
+                      {h}
+                    </IonSelectOption>
+                  ))}
+                </IonSelect>
+              </IonItem>
             <IonItem className="appointment-select">
               <IonLabel>Médico</IonLabel>
               <IonSelect
@@ -154,6 +198,7 @@ const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
             <SchedulePopup
               onClick={setIsDisplayed}
               isDisplayed={isDisplayed}
+              path={"appointment"}
             ></SchedulePopup>
             <IonButton
               className="schedule-btn"
@@ -188,5 +233,6 @@ const CreateAppointment: React.FC<RouteComponentProps> = ({ history }) => {
     </IonPage>
   );
 };
+
 
 export default CreateAppointment;

@@ -4,3 +4,11 @@
 .secondary{
     color:#3dc2ff;
 } */
+.appointment span.e-day{
+    background-color: #15eda3 !important;
+    border-radius: 60px !important;
+}
+.analysis span.e-day{
+    background-color: #068b80 !important;
+    border-radius: 60px !important;
+}

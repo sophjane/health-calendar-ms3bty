@@ -13,12 +13,13 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { RouteComponentProps } from "react-router";
 import DateButton from "../components/DateButton";
 import Layout from "../components/Layout";
 import Toolbar from "../components/Toolbar";
 import SchedulePopup from "../components/SchedulePopup";
+import {UserContext} from '../App'
 
 import "./CreateAnalysis.css";
 
@@ -67,9 +68,63 @@ const dummyClinic = [
 
 const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
   const [selected, setSelected] = useState<string>("Hospital");
-  const location = selected === "Hospital" ? dummyHospital : dummyClinic;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const user = useContext(UserContext);
+  const [selHospital, setSelHospital] = useState([""]);
+  const [selClinic, setSelClinic] = useState([""]);
+  const location = selected === "Hospital" ? selHospital : selClinic;
+  const [index, setIndex] = useState(0);
+
+  const setSelectedCity = (city: String) => {
+    switch (city) {
+      case "Aveiro":
+        setSelHospital(user.hospitalList.Aveiro);
+        setSelClinic(user.clinicList.Aveiro);
+        setIndex(1);
+        break;
+      case "Almada":
+        setSelHospital(user.hospitalList.Almada);
+        setSelClinic(user.clinicList.Almada);
+        setIndex(0);
+        break;
+      case "Barcelos":
+        setSelHospital(user.hospitalList.Barcelos);
+        setSelClinic(user.clinicList.Barcelos);
+        setIndex(2);
+        break;
+      case "Coimbra":
+        setSelHospital(user.hospitalList.Coimbra);
+        setSelClinic(user.clinicList.Coimbra);
+        setIndex(3);
+        break;
+      case "Fig. Foz":
+        setSelHospital(user.hospitalList["Fig. Foz"]);
+        setSelClinic(user.clinicList["Fig. Foz"]);
+        setIndex(4);
+  
+        break;
+      case "Lisboa":
+        setSelHospital(user.hospitalList.Lisboa);
+        setSelClinic(user.clinicList.Lisboa);
+        setIndex(5);
+  
+        break;
+      case "Ovar":
+        setSelHospital(user.hospitalList.Ovar);
+        setSelClinic(user.clinicList.Ovar);
+        setIndex(6);
+  
+        break;
+      case "Porto":
+        setSelHospital(user.hospitalList.Porto);
+        setSelClinic(user.clinicList.Porto);
+        setIndex(7);
+  
+        break;
+    }
+  }
+  const setSelectedHospital = (e: String) => {};
 
   return (
     <IonPage>
@@ -88,12 +143,26 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
                   Escolha um local
                 </IonLabel>
               </IonListHeader>
-              <IonItem>
+              <IonItem className="location-select">
+                <IonLabel>Cidade</IonLabel>
+                <IonSelect
+                  okText="Ok"
+                  cancelText="Cancelar"
+                  onIonChange={(e) => setSelectedCity(e.detail.value)}
+                >
+                  {user.cityList.map((city, ind) => (
+                    <IonSelectOption key={ind} value={city}>
+                      {city}
+                    </IonSelectOption>
+                  ))}
+                </IonSelect>
+              </IonItem>
+              <IonItem className="location-select">
                 <IonLabel>Hospital</IonLabel>
                 <IonRadio slot="start" value="Hospital" />
               </IonItem>
 
-              <IonItem>
+              <IonItem className="location-select">
                 <IonLabel>Clínica</IonLabel>
                 <IonRadio slot="start" value="Clínica" />
               </IonItem>
@@ -102,8 +171,8 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
               <IonLabel>{selected}</IonLabel>
               <IonSelect>
                 {location.map((e, i) => (
-                  <IonSelectOption key={i} value={e.value}>
-                    {e.label}
+                  <IonSelectOption key={i} value={e}>
+                    {e}
                   </IonSelectOption>
                 ))}
               </IonSelect>
@@ -117,6 +186,7 @@ const CreateAnalysis: React.FC<RouteComponentProps> = ({ history }) => {
           <SchedulePopup
             onClick={setIsDisplayed}
             isDisplayed={isDisplayed}
+            path={"analysis"}
           ></SchedulePopup>
           <IonButton
             className="schedule-btn"
