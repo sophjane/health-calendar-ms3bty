@@ -1,12 +1,21 @@
-import React, {useState} from 'react'
+import React, {useContext,useState} from 'react'
+import {UserContext} from '../../App'
 import {CalendarComponent, ChangedEventArgs, RenderDayCellEventArgs} from '@syncfusion/ej2-react-calendars'
 import {Row, Col} from 'react-bootstrap';
 import './Calendar.css'
 import { IonButton, IonLabel, IonText } from '@ionic/react';
 const Calendar = () => {
+    const user = useContext(UserContext);
     const [date, setDate] = useState(new Date());
-    const dateAnalysis = [new Date("06/10/2021"), new Date("05/27/2021"), new Date("06/12/2021")];
-    const dateAppointments = [new Date("06/02/2021"), new Date("06/01/2021"), new Date("05/30/2021")];
+    const dateAnalysis:Array<Date> = [];
+    const dateAppointments:Array<Date> = [];
+    user.scheduledAppointments.forEach(element => {
+        dateAppointments.push(new Date(element))
+    });
+    user.scheduledAnalysis.forEach(element => {
+        dateAppointments.push(new Date(element))
+    });
+    
     const maxDates = [new Date("06/30/2021")]
     const minDates = [new Date()];
     console.log((new Date()).getHours() - (new Date("06/30/2021")).getHours())
@@ -37,7 +46,7 @@ const Calendar = () => {
                                 <IonText className="d-flex align-items-center col-sm-6" color="light">
                                 <h4 style={{fontWeight:"bold"}} id="your-calendar" className="my-0 ml-2">O seu Calendário</h4>
                                 </IonText>
-                                <IonButton href="/settings" size="small" className="col-sm-4 col-lg-5"><IonLabel>Adicionar Lembrete</IonLabel></IonButton></div>
+                                <IonButton href="/settings" size="default" className="col-sm-4 col-lg-5"><IonLabel>Adicionar Lembrete</IonLabel></IonButton></div>
                         </Row>
             <CalendarComponent
                     id="calendar"

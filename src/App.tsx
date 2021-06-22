@@ -52,7 +52,7 @@ interface IUserManager {
     "NumUtente":Number,
     "Cidade":String,
     "Hospital":String
-  },
+  };
   setUserInfo : Function;
   cityList : Array<String>;
   hospitalList: {
@@ -65,6 +65,8 @@ interface IUserManager {
     'Ovar' : ['Dr. Francisco Zagalo'],
     'Porto' : ["Magalhães Lemos", 'S. João']
    };
+   scheduledAppointments : Array<string>;
+   scheduledAnalysis : Array<string>;
 }
 const user: IUserManager = {
   setIsLoggedIn : () =>{},
@@ -89,6 +91,8 @@ const user: IUserManager = {
     'Ovar' : ['Dr. Francisco Zagalo'],
     'Porto' : ["Magalhães Lemos", 'S. João']
    },
+   scheduledAppointments :[],
+   scheduledAnalysis :[],
 }
 export const UserContext = React.createContext<IUserManager>(user);
 

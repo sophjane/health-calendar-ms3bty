@@ -6,7 +6,8 @@ interface ToolbarProps {
   variant?: "logo" | "back";
 }
 
-const Toolbar = ({ title, variant = "logo" }: ToolbarProps) => {
+const Toolbar = ({ title, variant }: ToolbarProps) => {
+  console.log(variant==="back")
   return (
     <IonToolbar className="ion-toolbar">
       <div className="toolbar">
