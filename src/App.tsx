@@ -65,8 +65,20 @@ interface IUserManager {
     'Ovar' : ['Dr. Francisco Zagalo'],
     'Porto' : ["Magalhães Lemos", 'S. João']
    };
-   scheduledAppointments : Array<string>;
-   scheduledAnalysis : Array<string>;
+   clinicList: {
+    'Almada' : ['Clinica Padre Cruz'],
+    'Aveiro' : ['Centro Clínico Aveiro', 'CliVida', 'Cliovar', "Clínica Santa Joana"],
+    'Barcelos' : ['Cardima', 'Unilabs Barcelos'],
+    'Coimbra' : ['Clinica Montes Claros', 'Clinica Dr António Travassos'],
+    'Fig. Foz' : ["Climel"],
+    'Lisboa' : ['Silvia Todo-Bom, Clinica Médica, Lda'],
+    'Ovar' : ['Fisiovar'],
+    'Porto' : ['Clinica Médica e Terapêutica, Lda', 'Clinica Médica do Porto']
+   };
+   scheduledAppointments : Array<Date>;
+   scheduledAnalysis : Array<Date>;
+   setHasScheduledAppointment : Function;
+   setHasScheduledAnalysis : Function;
 }
 const user: IUserManager = {
   setIsLoggedIn : () =>{},
@@ -91,13 +103,27 @@ const user: IUserManager = {
     'Ovar' : ['Dr. Francisco Zagalo'],
     'Porto' : ["Magalhães Lemos", 'S. João']
    },
+   clinicList: {
+    'Almada' : ['Clinica Padre Cruz'],
+    'Aveiro' : ['Centro Clínico Aveiro', 'CliVida', 'Cliovar', "Clínica Santa Joana"],
+    'Barcelos' : ['Cardima', 'Unilabs Barcelos'],
+    'Coimbra' : ['Clinica Montes Claros', 'Clinica Dr António Travassos'],
+    'Fig. Foz' : ["Climel"],
+    'Lisboa' : ['Silvia Todo-Bom, Clinica Médica, Lda'],
+    'Ovar' : ['Fisiovar'],
+    'Porto' : ['Clinica Médica e Terapêutica, Lda', 'Clinica Médica do Porto']
+   },
    scheduledAppointments :[],
    scheduledAnalysis :[],
+   setHasScheduledAppointment : () => {},
+   setHasScheduledAnalysis : () => {},
 }
 export const UserContext = React.createContext<IUserManager>(user);
 
 const IonicApp: React.FC = () => {
  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ const [hasScheduledAppointment, setHasScheduledAppointment] = useState(false);
+ const [hasScheduledAnalysis, setHasScheduledAnalysis] = useState(false);
  const [createAcc, setCreateAcc] = useState(0);
  const currPage = [
                     Login,
@@ -112,6 +138,14 @@ const IonicApp: React.FC = () => {
                     "Hospital":""
                   })
  user.setIsLoggedIn = setIsLoggedIn;
+ user.setHasScheduledAnalysis = setHasScheduledAnalysis;
+ user.setHasScheduledAppointment = setHasScheduledAppointment;
+ if(hasScheduledAppointment){
+ user.scheduledAppointments = [new Date("07/03/2021")];
+}
+if(hasScheduledAnalysis){
+  user.scheduledAnalysis = [new Date("06/30/2021")];
+}
  user.setCreateAcc = setCreateAcc;
  user.setUserInfo = setUserInfo;
  user.userInfo=userInfo;

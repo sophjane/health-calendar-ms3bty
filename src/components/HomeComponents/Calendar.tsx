@@ -10,13 +10,13 @@ const Calendar = () => {
     const dateAnalysis:Array<Date> = [];
     const dateAppointments:Array<Date> = [];
     user.scheduledAppointments.forEach(element => {
-        dateAppointments.push(new Date(element))
+        dateAppointments.push(element)
     });
     user.scheduledAnalysis.forEach(element => {
-        dateAppointments.push(new Date(element))
+        dateAnalysis.push(element)
     });
     
-    const maxDates = [new Date("06/30/2021")]
+    const maxDates = [new Date("08/30/2021")]
     const minDates = [new Date()];
     console.log((new Date()).getHours() - (new Date("06/30/2021")).getHours())
     var currentDay;

@@ -1,11 +1,3 @@
-.appointment span.e-day{
-    background-color: #15eda3;
-    border-radius: 60px !important;
-}
-.analysis span.e-day{
-    background-color: #068b80;
-    border-radius: 60px !important;
-}
 .e-calendar, .e-bigger.e-small .e-calendar {
     max-width: 500px !important;
     min-width: 240px !important;
