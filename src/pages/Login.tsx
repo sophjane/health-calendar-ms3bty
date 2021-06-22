@@ -12,7 +12,6 @@ import {
     IonIcon, 
     IonButton,
     IonText,
-    useIonModal,
     useIonToast,
     IonAlert} from '@ionic/react';
 
